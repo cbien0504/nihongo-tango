@@ -1013,6 +1013,38 @@ kbd {
   letter-spacing: 0.04em;
 }
 
+/* Single kanji asked by the Kanji quiz, and kanji options. */
+.kanji-main {
+  font-size: 4.5rem;
+  font-weight: 700;
+}
+
+.options--kanji .option-text {
+  font-size: 1.8rem;
+  line-height: 1.2;
+}
+
+.kanji-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.kanji-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.kanji-list-char {
+  font-size: 1.6rem;
+  font-weight: 700;
+  min-width: 2rem;
+}
+
 .word-reading {
   font-family: var(--font-jp);
   font-size: 1.4rem;

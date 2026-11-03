@@ -6,13 +6,14 @@ Usage (from the repo root):
 Without a path, KANJIDIC2 is downloaded from EDRDG. Each kanji used by the exam words
 (underlined targets and options, but not the sentences of usage options) of N3 and of
 the jtest.net quizzes, by the jtest.net decks (N5, N4 and N2, which have no
-Hán Việt of their own) or by the companion words gets one reading, chosen in this order:
+Hán Việt of their own), by the companion words or by the kanji lists (kanji_n2.json has
+no Hán Việt either) gets one reading, chosen in this order:
   1. OVERRIDES below (common reading when KANJIDIC2 lists several or a wrong one);
   2. the most frequent reading in the vocabulary JSON, so the exam agrees with the
      Hán Việt shown in the vocabulary quiz;
   3. the first Vietnamese reading of KANJIDIC2.
-Run it again after regenerating the exam data (build_exam_data.py, crawl_jtest_quiz.py) or
-scripts/build_vocab_data.py.
+Run it again after regenerating the exam data (build_exam_data.py, crawl_jtest_quiz.py),
+scripts/build_vocab_data.py or scripts/crawl_kanji.py.
 """
 
 import json
@@ -33,6 +34,8 @@ EXAM_PATH = DATA_DIR / "jlpt_n3_minchan_exam.json"
 JTEST_EXAM_GLOB = "jtest_*_exam.json"
 # The decks written by scripts/build_vocab_data.py.
 JTEST_DECK_GLOB = "jtest_*_vocab.json"
+# The kanji lists written by scripts/crawl_kanji.py.
+KANJI_LIST_GLOB = "kanji_n*.json"
 COMPANIONS_PATH = DATA_DIR / "vocab_companions.json"
 DEFAULT_OUTPUT = DATA_DIR / "kanji_han_viet.json"
 
@@ -94,6 +97,12 @@ OVERRIDES = {
     "飲": "ẨM",
     # Kanji of the N2 exam quizzes.
     "陥": "HÃM",
+    # Kanji of the kanji lists: the reading of the Japanese kanji.
+    "県": "HUYỆN",
+    "拝": "BÁI",
+    "机": "KỈ",
+    "伺": "TỨ",
+    "芸": "NGHỆ",
 }
 
 
@@ -134,6 +143,8 @@ def needed_kanji() -> set[str]:
         for question in json.loads(path.read_text(encoding="utf-8"))["questions"]:
             # Usage options are sentences, shown without Hán Việt.
             words += [question["target"], *(question["options"] if question["part"] != "usage" else [])]
+    for path in sorted(DATA_DIR.glob(KANJI_LIST_GLOB)):
+        words += [entry["kanji"] for entry in json.loads(path.read_text(encoding="utf-8"))["kanji"]]
     return {char for word in words for char in KANJI_RE.findall(word)}
 
 

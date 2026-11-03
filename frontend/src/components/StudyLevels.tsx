@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { N2_EXAM, N3_EXAM } from "../data/examBanks";
+import { KANJI_N2_DECK, KANJI_N3_DECK, type KanjiDeck } from "../data/kanjiDecks";
 import { N2_DECK, N3_DECK, N4_DECK, N5_DECK, type VocabDeck } from "../data/vocabDecks";
 import { useDeckProgress } from "../hooks/useProgress";
 import { enumCodec, usePersistentState } from "../hooks/usePersistentState";
@@ -8,10 +9,12 @@ import type { DeckId } from "../types/progress";
 import type { ExamBank } from "../utils/examEngine";
 import { trackEvent } from "../utils/gtm";
 import ExamPractice from "./exam/ExamPractice";
+import KanjiPractice from "./kanji/KanjiPractice";
 import VocabPractice from "./vocab/VocabPractice";
 
 const SECTIONS = [
   { id: "vocab", label: "📖 Từ vựng" },
+  { id: "kanji", label: "🈶 Kanji" },
   { id: "exam", label: "📝 Luyện đề" },
 ] as const;
 
@@ -20,19 +23,25 @@ type SectionId = (typeof SECTIONS)[number]["id"];
 interface Level {
   id: DeckId;
   deck: VocabDeck;
+  /** Single kanji of the level, which then has the kanji section. */
+  kanji?: KanjiDeck;
   /** Exam papers of the level, which then has the exam section. */
   exam?: ExamBank;
 }
 
-// Every JLPT level has its own vocabulary deck; N3 and N2 have exam papers so far.
+// Every JLPT level has its own vocabulary deck; N3 and N2 have single kanji and exam papers so far.
 const LEVELS: Level[] = [
   { id: "n5", deck: N5_DECK },
   { id: "n4", deck: N4_DECK },
-  { id: "n3", deck: N3_DECK, exam: N3_EXAM },
-  { id: "n2", deck: N2_DECK, exam: N2_EXAM },
+  { id: "n3", deck: N3_DECK, kanji: KANJI_N3_DECK, exam: N3_EXAM },
+  { id: "n2", deck: N2_DECK, kanji: KANJI_N2_DECK, exam: N2_EXAM },
 ];
 
-const sectionsOf = (level: Level): SectionId[] => (level.exam ? ["vocab", "exam"] : ["vocab"]);
+const sectionsOf = (level: Level): SectionId[] => [
+  "vocab",
+  ...(level.kanji ? ["kanji" as const] : []),
+  ...(level.exam ? ["exam" as const] : []),
+];
 
 const levelCodec = enumCodec<DeckId>(LEVELS.map((l) => l.id));
 const sectionCodec = enumCodec<SectionId>(SECTIONS.map((s) => s.id));
@@ -58,7 +67,7 @@ function LevelProgress({ deck }: { deck: VocabDeck }) {
   );
 }
 
-/** The JLPT levels N5 → N2 and the sections of each: vocabulary for every level, exam papers for N3 and N2. */
+/** The JLPT levels N5 → N2 and the sections of each: vocabulary for every level, single kanji and exam papers for N3 and N2. */
 export default function StudyLevels() {
   const [levelId, setLevelId] = usePersistentState<DeckId>("mimikara_level", "n3", levelCodec);
   const [sectionId, setSectionId] = usePersistentState<SectionId>("mimikara_section", "vocab", sectionCodec);
@@ -96,7 +105,7 @@ export default function StudyLevels() {
       {/* Every level and section stays mounted so switching keeps the current sessions. */}
       {LEVELS.map((level) => {
         const sections = SECTIONS.filter((s) => sectionsOf(level).includes(s.id));
-        // A level without the chosen section (no exam papers) shows its first one.
+        // A level without the chosen section (no kanji or exam papers) shows its first one.
         const shown = sections.some((s) => s.id === sectionId) ? sectionId : sections[0].id;
         return (
           <section
@@ -133,11 +142,13 @@ export default function StudyLevels() {
                 className="panel"
                 hidden={shown !== s.id}
               >
-                {s.id === "vocab" || !level.exam ? (
+                {s.id === "vocab" && (
                   <VocabPractice deck={level.deck} active={levelId === level.id && shown === s.id} settings={vocabSettings} />
-                ) : (
-                  <ExamPractice bank={level.exam} />
                 )}
+                {s.id === "kanji" && level.kanji && (
+                  <KanjiPractice deck={level.kanji} active={levelId === level.id && shown === s.id} />
+                )}
+                {s.id === "exam" && level.exam && <ExamPractice bank={level.exam} />}
               </section>
             ))}
           </section>

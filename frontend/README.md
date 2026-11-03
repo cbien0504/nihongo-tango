@@ -1,6 +1,6 @@
 # Mimikara Oboeru N5 → N2 – Frontend
 
-React + TypeScript + Vite app organized by JLPT level: the level tabs **N5 · N4 · N3 · N2** each open the sections of that level, **📖 Từ vựng** for every level and **📝 Luyện đề** for N3 and N2. The chosen level and section are saved in localStorage (`mimikara_level`, `mimikara_section`); a level without the chosen section opens its vocabulary. Every level and section stays mounted, so switching keeps the current session.
+React + TypeScript + Vite app organized by JLPT level: the level tabs **N5 · N4 · N3 · N2** each open the sections of that level, **📖 Từ vựng** for every level, **🈶 Kanji** and **📝 Luyện đề** for N3 and N2. The chosen level and section are saved in localStorage (`mimikara_level`, `mimikara_section`); a level without the chosen section opens its vocabulary. Every level and section stays mounted, so switching keeps the current session.
 
 Learners first register or log in with a username and a password (see [Login and progress](#login-and-progress)); the level tabs then show how many words of each level they remembered.
 
@@ -12,6 +12,8 @@ In every level, each learner has their own words to review (📌 Chưa nhớ) an
 - **📝 Trắc nghiệm** – the quiz above.
 - **🧠 Thẻ ghi nhớ** – flashcards with spaced repetition (Leitner boxes): recall the meaning, flip the card (Space), then grade yourself 1 Quên · 2 Khó · 3 Nhớ · 4 Dễ. Remembered words come back after 1 → 3 → 7 → 14 → 30 → 60 → 120 days, forgotten ones come back in the same session and go to the unremembered list. Each session takes the due reviews of the selected batch plus 20 new words. Progress is saved per learner and level.
 - **🔗 Học 1 được 2** – after answering (and on the back of a flashcard) up to two companion words are shown: the 自動詞/他動詞 pair of a verb (倒れる → 倒す), then synonyms and antonyms, each with reading, Hán Việt, meaning and speaker.
+
+- **🈶 Kanji N3 · N2** – multiple-choice quiz over the single kanji of the level (see [Kanji N3 and N2](#kanji-n3-and-n2)), by lessons of 20 kanji in the order of the list or the whole list. Two ways to ask, saved per level (`mimikara_kanji_mode_<level>`): **Kanji → Hán Việt** and **Hán Việt → Kanji**; a wrong option is never read like the kanji asked. Wrong answers come back later in the round and are listed at its end. Every answer shows the kanji with its Hán Việt and meaning, and up to three words of the vocabulary written with it, words of the same level first. On and kun readings are left out, and the Kanji quiz saves no progress: reloading the page starts the lesson again.
 
 - **📝 Luyện đề N3** – 文字・語彙 exam papers built from `JLPT_N3_tu_vung_Minchan.docx` (440 questions). Questions are grouped by part like the real exam: 問題1 漢字読み, 問題2 表記, 問題3 文脈規定, 問題4 言い換え類義. Pick a random mock paper (real N3 question counts), a lesson (Bài 1–8) or a whole part, then submit to see the score per part. The options of every question are shuffled each time a paper is started or retried.
 - **📝 Luyện đề N2** – the 26 vocabulary quizzes of [JTest.net](https://jtest.net/jlpt/n2/vocabulary) (262 questions) in the same papers: 文脈規定 (191 questions), 言い換え類義 (41) and 用法 (30), whose options are sentences shown one per row. Pick a mock paper (7 + 5 + 5 questions like the real N2 paper), a quiz (Quiz 1–26) or a part; after submitting, every question shows the explanation of the site: the word with its reading and meaning, the sentence in Vietnamese and the other words of the sentence.
@@ -48,9 +50,10 @@ src/
 │   ├── user/               # LoginScreen (log in / register), UserBar, SessionNotices (welcome, old progress import, expired session), ProgressProvider
 │   ├── ui/                 # shared pieces: OptionButton, HanVietButton, CompanionList, ProgressCard, ResultPanel, Modal, SettingToggle, VocabTable
 │   ├── vocab/              # vocabulary section of a level: mode switch + toolbar (VocabPractice), QuizPractice, FlashcardPractice, QuestionCard, WordHero, UnrememberedModal
+│   ├── kanji/              # Kanji section of N3 and N2: KanjiPractice (Kanji ↔ Hán Việt quiz)
 │   └── exam/               # exam papers (sections, questions, result)
-├── hooks/                  # persistent state, learner progress (useProgress, word lists, flashcards), shared vocab settings, speech, keyboard shortcuts, quiz session
-├── data/                   # N5/N4/N2 (jtest.net) and N3 vocabulary, companions, exam and kanji Hán Việt JSON; vocabDecks builds the deck of every level, examBanks the exam papers of N3 and N2
+├── hooks/                  # persistent state, learner progress (useProgress, word lists, flashcards), shared vocab settings, speech, keyboard shortcuts, quiz session, kanji quiz
+├── data/                   # N5/N4/N2 (jtest.net) and N3 vocabulary, companions, exam, N3/N2 kanji lists and kanji Hán Việt JSON; vocabDecks builds the deck of every level, kanjiDecks and examBanks the kanji and exam papers of N3 and N2
 ├── utils/                  # progressStore + progressApi (accounts, learner progress & sync), progress (merge, username and password rules), legacyProgress, quizEngine, srs, examEngine, hanViet, gtm
 ├── test/                   # test setup (offline by default) and fakeApi, the backend served from memory
 └── types/
@@ -87,9 +90,22 @@ python3 scripts/build_vocab_data.py      # downloads JMdict
 python3 scripts/build_han_viet_data.py   # downloads KANJIDIC2
 ```
 
+## Kanji N3 and N2
+
+`scripts/crawl_kanji.py` downloads both lists, pausing between pages, and writes `src/data/kanji_n3.json` and `src/data/kanji_n2.json` without the on and kun readings:
+
+- **N3** – the table of [kohi.vn](https://kohi.vn/blog/tong-hop-kanji-n3-day-du-nhat-nigbu): kanji, Hán Việt and Vietnamese meaning. The script skips empty rows and kanji listed twice, numbers the 416 kanji again and fixes the readings in `KOHI_CORRECTIONS` (陽 DƯƠNG, 板 BẢN, 数 SỐ, 炭 THÁN).
+- **N2** – pages 1–4 of [JLPTsensei](https://jlptsensei.com/jlpt-n2-kanji-list/), kanji only (their meanings are English). A kanji also in the N3 list (161 of the 374) takes its N3 Hán Việt; the others are read in `kanji_han_viet.json`, so run `build_han_viet_data.py` after the crawl: it adds the kanji of both lists to that table.
+
+```bash
+# run from the repository root
+python3 scripts/crawl_kanji.py
+python3 scripts/build_han_viet_data.py   # downloads KANJIDIC2
+```
+
 ## Hán Việt buttons
 
-Every exam word written in kanji (the underlined word and each option, except the sentences of 用法 options) has a **Hán Việt** button that shows its Sino-Vietnamese reading; in the vocabulary quiz the same button appears while Hán Việt is hidden. Readings come from the N3 vocabulary data when the word is in it, otherwise kanji by kanji from `src/data/kanji_han_viet.json`; the N5, N4 and N2 vocabulary and the companion words get their Hán Việt the same way, leaving out the context in brackets (（お金を）下ろす → HẠ). Regenerate that table after changing the exam data or running `build_vocab_data.py`:
+Every exam word written in kanji (the underlined word and each option, except the sentences of 用法 options) has a **Hán Việt** button that shows its Sino-Vietnamese reading; in the vocabulary quiz the same button appears while Hán Việt is hidden. Readings come from the N3 vocabulary data when the word is in it, otherwise kanji by kanji from `src/data/kanji_han_viet.json`; the N5, N4 and N2 vocabulary and the companion words get their Hán Việt the same way, leaving out the context in brackets (（お金を）下ろす → HẠ). Regenerate that table after changing the exam data or running `build_vocab_data.py` or `crawl_kanji.py`:
 
 ```bash
 python3 scripts/build_han_viet_data.py   # run from the repository root; downloads KANJIDIC2

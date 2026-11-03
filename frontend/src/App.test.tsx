@@ -523,6 +523,29 @@ describe("JLPT levels and their sections", () => {
     expect(screen.getByText("漢字読み", { selector: "h2 span" })).toBeInTheDocument();
   });
 
+  it("practices the single kanji of N3 and N2 in a section of their own", () => {
+    render(<App />);
+    const sectionsOf = (level: string) =>
+      within(screen.getByRole("tablist", { name: `Mục học ${level}` }))
+        .getAllByRole("tab")
+        .map((tab) => tab.textContent);
+    expect(sectionsOf("N3")).toEqual(["📖 Từ vựng", "🈶 Kanji", "📝 Luyện đề"]);
+
+    fireEvent.click(screen.getByRole("tab", { name: /Kanji/ }));
+    expect(localStorage.getItem("mimikara_section")).toBe("kanji");
+    expect(shownPanels()).toEqual(["level-n3", "panel-n3-kanji"]);
+    // The shortcuts answer the kanji quiz, not the hidden vocabulary quiz.
+    fireEvent.keyDown(window, { key: "1" });
+    expect(document.getElementById("panel-n3-kanji")!.querySelector(".feedback")).not.toBeNull();
+    expect(vocabPanel().querySelector(".feedback")).toBeNull();
+
+    fireEvent.click(levelTab("N2"));
+    expect(sectionsOf("N2")).toEqual(["📖 Từ vựng", "🈶 Kanji", "📝 Luyện đề"]);
+    expect(shownPanels()).toEqual(["level-n2", "panel-n2-kanji"]);
+    fireEvent.click(levelTab("N5"));
+    expect(shownPanels()).toEqual(["level-n5", "panel-n5-vocab"]);
+  });
+
   it("opens the level saved in localStorage", () => {
     localStorage.setItem("mimikara_level", "n4");
     render(<App />);
