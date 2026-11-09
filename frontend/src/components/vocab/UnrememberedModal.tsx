@@ -88,7 +88,7 @@ export default function UnrememberedModal({
   return (
     <Modal
       title={`${LISTS[list].title} (${shown.length} từ)`}
-      subtitle="Từ đã học (đã trả lời hoặc chấm thẻ) mà chưa đánh dấu Đã nhớ đều là Chưa nhớ"
+      subtitle="Mọi từ chưa đánh dấu Đã nhớ đều là Chưa nhớ; từ đã học (đã trả lời hoặc chấm thẻ) được xếp trước"
       onClose={onClose}
       toolbar={
         <>

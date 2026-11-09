@@ -106,7 +106,7 @@ export default function QuestionCard({
             <p className="feedback-text">
               <strong lang="ja">{question.question_text}</strong>
               {question.han_viet ? ` [Hán Việt: ${question.han_viet}]` : ""} = <strong>{question.answer}</strong>
-              {!isCorrect && " (tự động thêm vào danh sách Chưa nhớ)"}
+              {!isCorrect && " (được ôn trước trong danh sách Chưa nhớ)"}
             </p>
             <CompanionList companions={companions} onSpeak={onSpeakText} />
             {item && (

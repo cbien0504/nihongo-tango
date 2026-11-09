@@ -43,10 +43,19 @@ const wordsWith = (status: WordStatus, deck: DeckId, user = USER) =>
     .filter(([, entry]) => entry.s === status)
     .map(([key]) => key);
 
-/** Logs USER in, with these words to review in a deck saved on this device. */
+const DECKS = { n5: N5_DECK, n4: N4_DECK, n3: N3_DECK, n2: N2_DECK };
+
+/**
+ * Logs USER in with only these words to review in a deck saved on this device: they are marked
+ * Chưa nhớ and every other word of the deck is remembered.
+ */
 const loginWithUnremembered = (deck: DeckId, items: VocabItem[]) => {
   localStorage.setItem("mimikara_user", USER);
-  const words = Object.fromEntries(items.map((item, i) => [getItemKey(item), { s: "u", t: i + 1 }]));
+  const toReview = new Set(items.map(getItemKey));
+  const words = Object.fromEntries([
+    ...DECKS[deck].items.filter((item) => !toReview.has(getItemKey(item))).map((item) => [getItemKey(item), { s: "k", t: 0 }]),
+    ...items.map((item, i) => [getItemKey(item), { s: "u", t: i + 1 }]),
+  ]);
   localStorage.setItem(progressStorageKey(USER), JSON.stringify({ decks: { [deck]: { words, cards: {} } }, dirty: {} }));
 };
 
@@ -114,25 +123,47 @@ describe("Mimikara Oboeru N3 – vocabulary practice", () => {
     const legend = vocabPanel().querySelector<HTMLElement>(".progress-legend")!;
     expect(within(legend).getByText(/Cần làm lại/).querySelector("strong")!.textContent).toBe("1");
     expect(wordsWith("u", "n3")).toHaveLength(1);
-    expect(screen.getByText(/tự động thêm vào danh sách Chưa nhớ/i)).toBeInTheDocument();
+    expect(screen.getByText(/được ôn trước trong danh sách Chưa nhớ/i)).toBeInTheDocument();
+  });
+
+  it("counts every word not remembered as to review, the words answered wrong first", () => {
+    render(<App />);
+    expect(listButton()).toHaveTextContent(String(N3_DECK.items.length));
+    const missed = currentItem();
+    answer(false);
+    // Already in the list: it moves first.
+    expect(listButton()).toHaveTextContent(String(N3_DECK.items.length));
+
+    fireEvent.click(listButton());
+    const dialog = screen.getByRole("dialog");
+    expect(within(dialog).getByText(new RegExp(`Bảng từ chưa nhớ \\(${N3_DECK.items.length} từ\\)`))).toBeInTheDocument();
+    const rows = () => within(dialog).getAllByRole("row").slice(1);
+    expect(within(rows()[0]).getByText(missed.meaning)).toBeInTheDocument();
+    // Long lists show 100 words at a time.
+    expect(rows()).toHaveLength(100);
+    fireEvent.click(within(dialog).getByRole("button", { name: /Xem thêm 100 từ/ }));
+    expect(rows()).toHaveLength(200);
+
+    fireEvent.click(within(rows()[0]).getByRole("button", { name: "✨ Đã nhớ" }));
+    expect(listButton()).toHaveTextContent(String(N3_DECK.items.length - 1));
   });
 
   it("counts a word as remembered only once the learner marks it, in the level tab and the word lists", () => {
     render(<App />);
     const word = currentItem();
     expect(levelTab("N3")).toHaveTextContent(`0/${N3_DECK.items.length}`);
-    expect(listButton()).toHaveTextContent("0");
 
-    // A word answered, even right, is to review until the learner marks it Đã nhớ.
+    expect(listButton()).toHaveTextContent(String(N3_DECK.items.length));
+
+    // A word answered, even right, is studied: still to review until the learner marks it Đã nhớ.
     answer(true);
     expect(wordsWith("u", "n3")).toEqual([getItemKey(word)]);
-    expect(listButton()).toHaveTextContent("1");
     expect(within(questionCard()).getByRole("button", { name: /Chưa nhớ \(C\)/ })).toHaveAttribute("aria-pressed", "true");
     expect(within(questionCard()).getByRole("button", { name: /Đã nhớ \(D\)/ })).toHaveAttribute("aria-pressed", "false");
 
     fireEvent.keyDown(window, { key: "d" });
     expect(wordsWith("k", "n3")).toEqual([getItemKey(word)]);
-    expect(listButton()).toHaveTextContent("0");
+    expect(listButton()).toHaveTextContent(String(N3_DECK.items.length - 1));
     expect(levelTab("N3")).toHaveTextContent(`1/${N3_DECK.items.length}`);
 
     fireEvent.click(listButton());
@@ -298,6 +329,7 @@ describe("Mimikara Oboeru N3 – vocabulary practice", () => {
   });
 
   it("shows an empty state when reviewing an empty unremembered list", () => {
+    loginWithUnremembered("n3", []);
     render(<App />);
 
     fireEvent.change(batchSelect(), { target: { value: "unremembered" } });
@@ -430,7 +462,7 @@ describe("Mimikara Oboeru N3 – vocabulary practice", () => {
     render(<App />);
     fireEvent.click(within(vocabPanel()).getByRole("button", { name: /Thẻ ghi nhớ/ }));
 
-    // A card graded, even Dễ, is to review until the learner marks it Đã nhớ.
+    // A card graded, even Dễ, is studied: still to review until the learner marks it Đã nhớ.
     fireEvent.keyDown(window, { key: " " });
     fireEvent.keyDown(window, { key: "4" });
     expect(wordsWith("u", "n3")).toHaveLength(1);
@@ -747,7 +779,7 @@ describe("Accounts and the progress of each learner", () => {
 
   it("logs in with the right password and downloads the progress saved from another device", async () => {
     const key = getItemKey(n3Word("家庭"));
-    serveFakeApi({ "an.le": { password: PASSWORD, progress: { n3: { words: { [key]: { s: "u", t: 1 } }, cards: {} } } } });
+    serveFakeApi({ "an.le": { password: PASSWORD, progress: { n3: { words: { [key]: { s: "k", t: 1 } }, cards: {} } } } });
     render(<App />);
 
     login("chua.co");
@@ -760,7 +792,7 @@ describe("Accounts and the progress of each learner", () => {
     login("An.Le");
     expect(await screen.findByText(/Chào mừng trở lại/)).toBeInTheDocument();
     expect(await screen.findByText("Đã lưu")).toBeInTheDocument();
-    expect(listButton()).toHaveTextContent("1");
+    expect(levelTab("N3")).toHaveTextContent(`1/${N3_DECK.items.length}`);
   });
 
   it("explains that logging in needs the server", async () => {
@@ -774,8 +806,10 @@ describe("Accounts and the progress of each learner", () => {
     render(<App />);
     login("an.le");
     await screen.findByText("Đã lưu");
-    answer(false);
-    expect(listButton()).toHaveTextContent("1");
+    const remembered = `1/${N3_DECK.items.length}`;
+    answer(true);
+    fireEvent.keyDown(window, { key: "d" });
+    expect(levelTab("N3")).toHaveTextContent(remembered);
 
     await logout();
     const calls = api.fetch.mock.calls.map(([url, init]) => `${init?.method} ${url}`);
@@ -784,12 +818,12 @@ describe("Accounts and the progress of each learner", () => {
 
     login("binh", "mat-khau-2");
     await screen.findByText("Đã lưu");
-    expect(listButton()).toHaveTextContent("0");
+    expect(levelTab("N3")).toHaveTextContent(`0/${N3_DECK.items.length}`);
 
     await logout();
     login("an.le");
     await screen.findByText("Đã lưu");
-    expect(listButton()).toHaveTextContent("1");
+    expect(levelTab("N3")).toHaveTextContent(remembered);
   });
 
   it("asks to log in again when the session expired, keeping the progress of this device", async () => {

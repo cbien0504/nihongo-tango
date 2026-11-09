@@ -79,7 +79,7 @@ export default function KanjiListModal({
   return (
     <Modal
       title={`${LISTS[list].title} ${deck.level} (${shown.length} chữ)`}
-      subtitle="Chữ đã trả lời mà chưa đánh dấu Đã nhớ đều là Chưa nhớ"
+      subtitle="Mọi chữ chưa đánh dấu Đã nhớ đều là Chưa nhớ; chữ đã trả lời được xếp trước"
       onClose={onClose}
       toolbar={
         <>

@@ -9,10 +9,10 @@ type MaybeItem = KanjiItem | null | undefined;
 
 /**
  * Kanji of a level the learner has to review (`unremembered`, chưa nhớ) and has remembered (`known`, đã nhớ),
- * in the order they were marked. They are saved in the progress of the level's kanji ("n3Kanji"), apart
- * from its words. Like a word, a kanji is remembered only when the learner marks it so; a kanji answered
- * is to review until then, and a wrong answer marks it to review again. Kanji never answered are in
- * neither list.
+ * saved in the progress of the level's kanji ("n3Kanji"), apart from its words. Like a word, a kanji is
+ * remembered only when the learner marks it so; every other kanji is to review. The kanji answered or
+ * marked Chưa nhớ come first, in the order they were marked, then the kanji never answered in the order
+ * of the list.
  */
 export function useKanjiProgress(deck: KanjiDeck) {
   const store = useProgressStore();
@@ -26,12 +26,14 @@ export function useKanjiProgress(deck: KanjiDeck) {
       if (item) lists[entry.s].push({ t: entry.t, item });
     }
     const ordered = (list: { t: number; item: KanjiItem }[]) => list.sort((a, b) => a.t - b.t).map(({ item }) => item);
-    return { unremembered: ordered(lists.u), known: ordered(lists.k) };
+    const studied = ordered(lists.u);
+    const isMarked = new Set([...studied, ...lists.k.map(({ item }) => item)]);
+    return { unremembered: [...studied, ...deck.items.filter((item) => !isMarked.has(item))], known: ordered(lists.k) };
   }, [deck, entries]);
 
-  /** Status of a kanji; `undefined` while it was never marked. */
+  /** Status of a kanji: a kanji never answered is to review ("u") too. */
   const statusOf = useCallback(
-    (item: MaybeItem): WordStatus | undefined => (item ? entries[kanjiKey(item)]?.s : undefined),
+    (item: MaybeItem): WordStatus | undefined => (item ? (entries[kanjiKey(item)]?.s ?? "u") : undefined),
     [entries]
   );
 
@@ -56,7 +58,7 @@ export function useKanjiProgress(deck: KanjiDeck) {
     [store, progressId, deck.level]
   );
 
-  /** A kanji answered is to review, unless the learner already marked it. */
+  /** A kanji answered is studied: it comes first in the kanji to review, unless the learner already marked it. */
   const markStudied = useCallback(
     (item: MaybeItem) => {
       if (item && !store.getDeck(progressId).words[kanjiKey(item)]) markUnremembered(item);
