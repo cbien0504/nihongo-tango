@@ -8,10 +8,11 @@ import { useDeckProgress, useProgressStore } from "./useProgress";
 type MaybeItem = VocabItem | null | undefined;
 
 /**
- * Words of a deck the learner has to review (`words`, chưa nhớ) and has remembered (`known`, đã nhớ).
- * They belong to the logged-in learner (see utils/progressStore). A word is remembered only when the
- * learner marks it so; every other word is to review, those answered wrong or marked Chưa nhớ first
- * (in the order they were marked), then the words never marked in the order of the list.
+ * Words of a deck the learner has to review (`words`, chưa nhớ) and has remembered (`known`, đã nhớ),
+ * in the order they were marked. They belong to the logged-in learner (see utils/progressStore).
+ * A word is remembered only when the learner marks it so; a word studied (answered in the quiz,
+ * graded as a flashcard) is to review until then, and a wrong answer marks it to review again.
+ * Words never studied are in neither list.
  */
 export function useUnrememberedWords(deck: VocabDeck) {
   const store = useProgressStore();
@@ -24,14 +25,12 @@ export function useUnrememberedWords(deck: VocabDeck) {
       if (item) lists[entry.s].push({ t: entry.t, item });
     }
     const ordered = (list: { t: number; item: VocabItem }[]) => list.sort((a, b) => a.t - b.t).map(({ item }) => item);
-    const marked = ordered(lists.u);
-    const isMarked = new Set([...marked, ...lists.k.map(({ item }) => item)]);
-    return { words: [...marked, ...deck.items.filter((item) => !isMarked.has(item))], known: ordered(lists.k) };
+    return { words: ordered(lists.u), known: ordered(lists.k) };
   }, [deck, entries]);
 
-  /** Status of a word: a word never marked is to review ("u") too. */
+  /** Status of a word; `undefined` while it was never marked. */
   const statusOf = useCallback(
-    (item: MaybeItem): WordStatus | undefined => (item ? (entries[getItemKey(item)]?.s ?? "u") : undefined),
+    (item: MaybeItem): WordStatus | undefined => (item ? entries[getItemKey(item)]?.s : undefined),
     [entries]
   );
 
@@ -56,6 +55,14 @@ export function useUnrememberedWords(deck: VocabDeck) {
     [store, deck.id]
   );
 
+  /** A word answered or graded is to review, unless the learner already marked it. */
+  const markStudied = useCallback(
+    (item: MaybeItem) => {
+      if (item && !store.getDeck(deck.id).words[getItemKey(item)]) markUnremembered(item);
+    },
+    [store, deck.id, markUnremembered]
+  );
+
   const markRemembered = useCallback(
     (item: MaybeItem) => {
       if (item && store.setWordStatus(deck.id, getItemKey(item), "k")) {
@@ -65,7 +72,7 @@ export function useUnrememberedWords(deck: VocabDeck) {
     [store, deck.id]
   );
 
-  return { words, known, statusOf, countKnown, batchItems, markUnremembered, markRemembered };
+  return { words, known, statusOf, countKnown, batchItems, markStudied, markUnremembered, markRemembered };
 }
 
 export type UnrememberedWords = ReturnType<typeof useUnrememberedWords>;

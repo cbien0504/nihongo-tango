@@ -42,7 +42,10 @@ export default function VocabPractice({ deck, active, settings }: VocabPracticeP
   const session = useVocabSession({
     deck,
     batchItems: (key) => unremembered.batchItems(key, onlyUnlearned),
-    onAnswer: (question) => speak(question.hiragana),
+    onAnswer: (question, item) => {
+      speak(question.hiragana);
+      unremembered.markStudied(item);
+    },
     onWrong: unremembered.markUnremembered,
   });
 
@@ -125,6 +128,7 @@ export default function VocabPractice({ deck, active, settings }: VocabPracticeP
           isSpeaking={isSpeaking}
           speak={speak}
           statusOf={unremembered.statusOf}
+          onStudied={unremembered.markStudied}
           onMarkUnremembered={unremembered.markUnremembered}
           onMarkRemembered={unremembered.markRemembered}
         />

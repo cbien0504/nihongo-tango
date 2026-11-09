@@ -16,13 +16,6 @@ const progressWith = (marks: Record<number, WordStatus> = {}) => {
   return store;
 };
 
-/** Every N3 kanji remembered, but these numbers to review. */
-const onlyToReview = (...stts: number[]) =>
-  progressWith({
-    ...Object.fromEntries(KANJI_N3_DECK.items.map((item) => [item.stt, "k" as const])),
-    ...Object.fromEntries(stts.map((stt) => [stt, "u" as const])),
-  });
-
 const renderPractice = (store = progressWith(), active = true) => {
   render(
     <ProgressContext.Provider value={store}>
@@ -122,29 +115,20 @@ describe("KanjiPractice", () => {
     expect(card().querySelector(".feedback")).toBeNull();
   });
 
-  it("counts every kanji not remembered as to review, the kanji answered wrong first, and D marks it remembered", () => {
+  it("puts a kanji answered wrong in the Chưa nhớ list, apart from the words, and D marks it remembered", () => {
     const store = renderPractice();
-    expect(listButton()).toHaveTextContent("416");
     const missed = asked();
     answer(false);
 
-    expect(within(card()).getByText(/được ôn trước trong danh sách Chưa nhớ/)).toBeInTheDocument();
+    expect(within(card()).getByText(/tự động thêm vào danh sách Chưa nhớ/)).toBeInTheDocument();
     expect(store.getDeck("n3Kanji").words[kanjiKey(missed)].s).toBe("u");
     expect(store.getDeck("n3").words).toEqual({});
-    expect(listButton()).toHaveTextContent("416");
+    expect(listButton()).toHaveTextContent("1");
     expect(within(card()).getByRole("button", { name: /Chưa nhớ \(C\)/ })).toHaveAttribute("aria-pressed", "true");
-
-    fireEvent.click(listButton());
-    const dialog = screen.getByRole("dialog", { name: /Kanji chưa nhớ N3 \(416 chữ\)/ });
-    const rows = within(dialog).getAllByRole("row").slice(1);
-    expect(within(rows[0]).getByText(missed.kanji)).toBeInTheDocument();
-    expect(rows).toHaveLength(100);
-    expect(within(dialog).getByRole("button", { name: /Xem thêm 100 chữ \(còn 316\)/ })).toBeInTheDocument();
-    fireEvent.click(within(dialog).getByRole("button", { name: "Đóng" }));
 
     fireEvent.keyDown(window, { key: "d" });
     expect(store.getDeck("n3Kanji").words[kanjiKey(missed)].s).toBe("k");
-    expect(listButton()).toHaveTextContent("415");
+    expect(listButton()).toHaveTextContent("0");
     expect(screen.getByText(/Đã nhớ/, { selector: ".toolbar-note" })).toHaveTextContent("Đã nhớ 1 / 416 chữ Kanji N3");
     const lesson = screen.getByRole("option", { name: /^Bài 1:/ });
     expect(lesson).toHaveTextContent("1/20 đã nhớ");
@@ -173,8 +157,8 @@ describe("KanjiPractice", () => {
   });
 
   it("reviews the kanji to review and lists them with the remembered ones", () => {
-    const [, , third, , fifth] = KANJI_N3_DECK.items;
-    const store = renderPractice(onlyToReview(3, 5));
+    const [first, , third, , fifth] = KANJI_N3_DECK.items;
+    const store = renderPractice(progressWith({ 3: "u", 5: "u", 1: "k" }));
 
     selectBatch("unremembered");
     expect(screen.getByText("Kanji N3 chưa nhớ")).toBeInTheDocument();
@@ -188,20 +172,49 @@ describe("KanjiPractice", () => {
     expect(store.getDeck("n3Kanji").words[kanjiKey(third)].s).toBe("k");
 
     fireEvent.click(within(dialog).getByRole("button", { name: /✅ Đã nhớ/ }));
-    const known = within(screen.getByRole("dialog", { name: /Kanji đã nhớ N3 \(415 chữ\)/ }));
-    // 才, remembered last, is beyond the first 100 rows: the search finds it.
-    expect(known.queryByText(third.kanji)).toBeNull();
-    fireEvent.change(known.getByRole("searchbox", { name: "Tìm Kanji đã nhớ" }), { target: { value: third.kanji } });
-    fireEvent.click(known.getByRole("button", { name: "📌 Chưa nhớ" }));
-    expect(store.getDeck("n3Kanji").words[kanjiKey(third)].s).toBe("u");
+    const known = within(screen.getByRole("dialog", { name: /Kanji đã nhớ N3 \(2 chữ\)/ }));
+    expect(known.getByText(first.kanji)).toBeInTheDocument();
+    expect(known.getByText(third.kanji)).toBeInTheDocument();
+
+    // Back to the kanji to review: the first remembered one is 丸, marked before 才.
+    fireEvent.click(known.getAllByRole("button", { name: "📌 Chưa nhớ" })[0]);
+    expect(store.getDeck("n3Kanji").words[kanjiKey(first)].s).toBe("u");
   });
 
-  it("shows an empty review list once every kanji is remembered", () => {
-    renderPractice(onlyToReview());
+  it("shows an empty review list", () => {
+    renderPractice();
     selectBatch("unremembered");
 
     expect(screen.getByText("Danh sách Kanji chưa nhớ hiện đang trống!")).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: /Luyện Kanji N3 – Bài 1/ }));
     expect(progressCount()).toContain("0 / 20 chữ");
+  });
+
+  it("puts every kanji answered in the Chưa nhớ list until it is marked remembered", () => {
+    const remembered = KANJI_N3_DECK.items[0];
+    const store = renderPractice(progressWith({ 1: "k" }));
+    expect(listButton()).toHaveTextContent("0");
+
+    // Answer the whole lesson right: every kanji goes to the list, but the one remembered stays so.
+    for (let i = 0; i < 20; i++) {
+      answer(true);
+      fireEvent.keyDown(window, { key: "Enter" });
+    }
+    expect(screen.getByText("Hoàn thành lượt Kanji!")).toBeInTheDocument();
+    expect(listButton()).toHaveTextContent("19");
+    expect(store.getDeck("n3Kanji").words[kanjiKey(remembered)].s).toBe("k");
+    expect(screen.getByRole("option", { name: /Ôn tập Kanji chưa nhớ/ })).toHaveTextContent("(19 chữ)");
+  });
+
+  it("lists long lists 100 kanji at a time", () => {
+    renderPractice(progressWith(Object.fromEntries(Array.from({ length: 150 }, (_, i) => [i + 1, "u" as const]))));
+    fireEvent.click(listButton());
+
+    const dialog = screen.getByRole("dialog", { name: /Kanji chưa nhớ N3 \(150 chữ\)/ });
+    const rows = () => within(dialog).getAllByRole("row").slice(1);
+    expect(rows()).toHaveLength(100);
+    fireEvent.click(within(dialog).getByRole("button", { name: "⬇️ Xem thêm 50 chữ (còn 50)" }));
+    expect(rows()).toHaveLength(150);
+    expect(within(dialog).queryByRole("button", { name: /Xem thêm/ })).toBeNull();
   });
 });

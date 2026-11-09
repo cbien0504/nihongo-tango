@@ -46,11 +46,13 @@ interface QuizState {
 interface KanjiQuizOptions {
   /** Kanji to practice in a batch, e.g. without the remembered ones. */
   batchItems: (key: string) => KanjiItem[];
+  /** Called with the kanji of every answer, then `onWrong` for a wrong one. */
+  onAnswer?: (item: KanjiItem) => void;
   onWrong?: (item: KanjiItem) => void;
 }
 
 /** Multiple-choice quiz over the kanji of a batch: wrong answers come back later in the round. */
-export function useKanjiQuiz(deck: KanjiDeck, initialMode: KanjiQuizMode, { batchItems, onWrong }: KanjiQuizOptions) {
+export function useKanjiQuiz(deck: KanjiDeck, initialMode: KanjiQuizMode, { batchItems, onAnswer, onWrong }: KanjiQuizOptions) {
   const draw = (mode: KanjiQuizMode, buffer: QuizBuffer, items: KanjiItem[]): KanjiQuestion | null => {
     if (buffer.isRoundComplete()) return null;
     const isRetry = buffer.getPendingNewCount() === 0;
@@ -101,6 +103,7 @@ export function useKanjiQuiz(deck: KanjiDeck, initialMode: KanjiQuizMode, { batc
   const answer = (index: number) => {
     if (!question || isAnswered || index < 0 || index >= question.options.length) return;
     const correct = question.options[index] === question.answer;
+    onAnswer?.(question.item);
     if (correct) {
       setState({ ...state, selectedIndex: index, correctCount: state.correctCount + 1 });
     } else {

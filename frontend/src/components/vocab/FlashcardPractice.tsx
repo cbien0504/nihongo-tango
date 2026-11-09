@@ -42,6 +42,8 @@ interface FlashcardPracticeProps {
   isSpeaking: boolean;
   speak: (text: string, force?: boolean) => void;
   statusOf: (item: VocabItem) => WordStatus | undefined;
+  /** Called with every card graded: the word is studied. */
+  onStudied: (item: VocabItem) => void;
   /** Also called for a card graded Quên. */
   onMarkUnremembered: (item: VocabItem) => void;
   onMarkRemembered: (item: VocabItem) => void;
@@ -60,6 +62,7 @@ export default function FlashcardPractice({
   isSpeaking,
   speak,
   statusOf,
+  onStudied,
   onMarkUnremembered,
   onMarkRemembered,
 }: FlashcardPracticeProps) {
@@ -85,6 +88,7 @@ export default function FlashcardPractice({
   const answer = (value: SrsGrade) => {
     if (!current || !flipped) return;
     grade(getItemKey(current), value, today);
+    onStudied(current);
     const rest = queue.slice(1);
     if (value === "again") {
       onMarkUnremembered(current);

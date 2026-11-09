@@ -52,7 +52,8 @@ interface SessionOptions {
   deck: VocabDeck;
   /** Words to practice in a batch now: they follow the learner's marks, so every round asks for them again. */
   batchItems: (key: string) => VocabItem[];
-  onAnswer: (question: Question) => void;
+  /** Called with every answer and the word asked. */
+  onAnswer: (question: Question, item: VocabItem | null) => void;
   onWrong: (item: VocabItem) => void;
 }
 
@@ -90,7 +91,7 @@ export function useVocabSession({ deck, batchItems, onAnswer, onWrong }: Session
   const answer = (index: number) => {
     if (!question || isAnswered || index < 0 || index >= question.options.length) return;
     const correct = question.options[index] === question.answer;
-    onAnswer(question);
+    onAnswer(question, currentItem);
 
     if (correct) {
       const streak = state.streak + 1;
