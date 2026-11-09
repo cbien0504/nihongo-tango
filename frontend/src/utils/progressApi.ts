@@ -1,11 +1,11 @@
-import type { DeckId, DeckProgress, Progress } from "../types/progress";
+import type { DeckProgress, Progress, ProgressDeckId } from "../types/progress";
 
 /** Entries changed on this device, merged into the saved deck by the server. */
 export type ProgressPatch = Partial<DeckProgress>;
 
 export interface ProgressApi {
   load(username: string): Promise<{ username: string; progress: Progress }>;
-  patchDeck(username: string, deck: DeckId, patch: ProgressPatch, options?: { keepalive?: boolean }): Promise<unknown>;
+  patchDeck(username: string, deck: ProgressDeckId, patch: ProgressPatch, options?: { keepalive?: boolean }): Promise<unknown>;
 }
 
 /** An answer of the API other than success; a fetch that fails without answer means offline. */

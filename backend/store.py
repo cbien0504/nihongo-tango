@@ -2,11 +2,12 @@
 
 DynamoDB table, partition key `username`, sort key `record`:
   - record "profile": passwordHash, createdAt, lastSeenAt, failed logins and lock, and for
-    every deck `<deck>Known` and `<deck>Unremembered` (n5Known, n3Unremembered…) so the level
+    every deck `<deck>Known` and `<deck>Unremembered` (n5Known, n3KanjiUnremembered…) so the level
     of each learner can be read in the DynamoDB console;
   - record "session#<SHA-256 of the token>": a login session, deleted by DynamoDB after
     `expiresAt` (TTL);
-  - record "n5", "n4", "n3", "n2": the progress of that deck (`words` and `cards` as JSON),
+  - record "n5", "n4", "n3", "n2" (words) and "n5Kanji"… "n2Kanji" (single kanji): the progress of
+    that deck (`words` and `cards` as JSON),
     its counts (known, unremembered, flashcards), updatedAt and a `version` that makes
     concurrent saves of the same deck retry instead of overwriting each other.
 """

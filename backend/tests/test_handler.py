@@ -152,6 +152,18 @@ class ProgressTest(unittest.TestCase):
         self.assertEqual(list(progress(table, an, "an.le")[1]["progress"]), ["n5"])
         self.assertEqual(list(progress(table, binh, "binh")[1]["progress"]), ["n2"])
 
+    def test_keeps_the_kanji_of_a_level_apart_from_its_words(self):
+        table = MemoryProgressTable()
+        session = register(table)
+        patch(table, session, "bien", "n3", {"stt_1": {"s": "u", "t": T}})
+        status, body, _ = patch(table, session, "bien", "n3Kanji", {"stt_1": {"s": "k", "t": T}, "stt_2": {"s": "k", "t": T}})
+
+        self.assertEqual((status, body), (200, {"deck": "n3Kanji", "summary": {"known": 2, "unremembered": 0, "flashcards": 0}}))
+        saved = progress(table, session, "bien")[1]["progress"]
+        self.assertEqual((saved["n3"]["words"]["stt_1"]["s"], saved["n3Kanji"]["words"]["stt_1"]["s"]), ("u", "k"))
+        profile = table.items[("bien", PROFILE)]
+        self.assertEqual((profile["n3Unremembered"], profile["n3KanjiKnown"]), (1, 2))
+
     def test_merges_again_when_the_deck_was_saved_meanwhile(self):
         class ConcurrentTable(MemoryProgressTable):
             """Another device saves the deck right after this request read it, once."""
@@ -184,6 +196,7 @@ class ProgressTest(unittest.TestCase):
         table = MemoryProgressTable()
         session = register(table)
         self.assertEqual(patch(table, session, "bien", "n1", {"stt_1": {"s": "k", "t": T}})[0], 400)
+        self.assertEqual(patch(table, session, "bien", "n1Kanji", {"stt_1": {"s": "k", "t": T}})[0], 400)
         self.assertEqual(patch(table, session, "bien", "n3", {"stt_1": {"s": "x", "t": T}})[0], 400)
         self.assertEqual(call(table, PATCH_PROGRESS, cookies=session, raw="{", username="bien", deck="n3")[0], 400)
         self.assertEqual(call(table, PATCH_PROGRESS, cookies=session, raw="[]", username="bien", deck="n3")[0], 400)

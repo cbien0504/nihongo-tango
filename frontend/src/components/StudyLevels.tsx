@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { N2_EXAM, N3_EXAM } from "../data/examBanks";
-import { KANJI_N2_DECK, KANJI_N3_DECK, type KanjiDeck } from "../data/kanjiDecks";
+import { KANJI_N2_DECK, KANJI_N3_DECK, KANJI_N4_DECK, KANJI_N5_DECK, type KanjiDeck } from "../data/kanjiDecks";
 import { N2_DECK, N3_DECK, N4_DECK, N5_DECK, type VocabDeck } from "../data/vocabDecks";
 import { useDeckProgress } from "../hooks/useProgress";
 import { enumCodec, usePersistentState } from "../hooks/usePersistentState";
@@ -29,10 +29,10 @@ interface Level {
   exam?: ExamBank;
 }
 
-// Every JLPT level has its own vocabulary deck; N3 and N2 have single kanji and exam papers so far.
+// Every JLPT level has its own vocabulary deck and single kanji; N3 and N2 have exam papers so far.
 const LEVELS: Level[] = [
-  { id: "n5", deck: N5_DECK },
-  { id: "n4", deck: N4_DECK },
+  { id: "n5", deck: N5_DECK, kanji: KANJI_N5_DECK },
+  { id: "n4", deck: N4_DECK, kanji: KANJI_N4_DECK },
   { id: "n3", deck: N3_DECK, kanji: KANJI_N3_DECK, exam: N3_EXAM },
   { id: "n2", deck: N2_DECK, kanji: KANJI_N2_DECK, exam: N2_EXAM },
 ];
@@ -67,7 +67,7 @@ function LevelProgress({ deck }: { deck: VocabDeck }) {
   );
 }
 
-/** The JLPT levels N5 → N2 and the sections of each: vocabulary for every level, single kanji and exam papers for N3 and N2. */
+/** The JLPT levels N5 → N2 and the sections of each: vocabulary and single kanji for every level, exam papers for N3 and N2. */
 export default function StudyLevels() {
   const [levelId, setLevelId] = usePersistentState<DeckId>("mimikara_level", "n3", levelCodec);
   const [sectionId, setSectionId] = usePersistentState<SectionId>("mimikara_section", "vocab", sectionCodec);

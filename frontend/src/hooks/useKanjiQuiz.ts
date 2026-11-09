@@ -43,8 +43,14 @@ interface QuizState {
   wrongItems: KanjiItem[];
 }
 
+interface KanjiQuizOptions {
+  /** Kanji to practice in a batch, e.g. without the remembered ones. */
+  batchItems: (key: string) => KanjiItem[];
+  onWrong?: (item: KanjiItem) => void;
+}
+
 /** Multiple-choice quiz over the kanji of a batch: wrong answers come back later in the round. */
-export function useKanjiQuiz(deck: KanjiDeck, initialMode: KanjiQuizMode) {
+export function useKanjiQuiz(deck: KanjiDeck, initialMode: KanjiQuizMode, { batchItems, onWrong }: KanjiQuizOptions) {
   const draw = (mode: KanjiQuizMode, buffer: QuizBuffer, items: KanjiItem[]): KanjiQuestion | null => {
     if (buffer.isRoundComplete()) return null;
     const isRetry = buffer.getPendingNewCount() === 0;
@@ -54,8 +60,7 @@ export function useKanjiQuiz(deck: KanjiDeck, initialMode: KanjiQuizMode) {
     return buildKanjiQuestion(items[index], mode, items.length < 4 ? deck.items : items, isRetry);
   };
 
-  const startRound = (mode: KanjiQuizMode, batchKey: string, round: number): QuizState => {
-    const { items } = deck.getBatch(batchKey);
+  const startRound = (mode: KanjiQuizMode, batchKey: string, round: number, items = batchItems(batchKey)): QuizState => {
     const buffer = new QuizBuffer(items.map((_, i) => i));
     return {
       mode,
@@ -82,8 +87,9 @@ export function useKanjiQuiz(deck: KanjiDeck, initialMode: KanjiQuizMode) {
   const retry = buffer.getPendingRetryCount() + (pendingCurrent && question.isRetry ? 1 : 0);
   const total = items.length;
 
-  const selectBatch = (key: string) => {
-    setState(startRound(mode, key, 1));
+  /** `items` replaces the kanji of the batch, e.g. when the learner just changed its filter. */
+  const selectBatch = (key: string, items?: KanjiItem[]) => {
+    setState(startRound(mode, key, 1, items));
     trackEvent("kanji_batch", { level: deck.level, batchKey: key, mode });
   };
 
@@ -99,6 +105,7 @@ export function useKanjiQuiz(deck: KanjiDeck, initialMode: KanjiQuizMode) {
       setState({ ...state, selectedIndex: index, correctCount: state.correctCount + 1 });
     } else {
       buffer.markWrong(items.indexOf(question.item));
+      onWrong?.(question.item);
       const wrongItems = state.wrongItems.includes(question.item) ? state.wrongItems : [...state.wrongItems, question.item];
       setState({ ...state, selectedIndex: index, wrongCount: state.wrongCount + 1, wrongItems });
     }

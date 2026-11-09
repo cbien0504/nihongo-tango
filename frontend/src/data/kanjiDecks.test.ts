@@ -1,14 +1,15 @@
 import { describe, expect, it } from "vitest";
-import { KANJI_BATCH_SIZE, KANJI_N2_DECK, KANJI_N3_DECK } from "./kanjiDecks";
-import { N2_DECK } from "./vocabDecks";
+import { KANJI_BATCH_SIZE, KANJI_N2_DECK, KANJI_N3_DECK, KANJI_N4_DECK, KANJI_N5_DECK, kanjiKey } from "./kanjiDecks";
+import { N2_DECK, N5_DECK, UNREMEMBERED_BATCH_KEY } from "./vocabDecks";
+
+const DECKS = [KANJI_N5_DECK, KANJI_N4_DECK, KANJI_N3_DECK, KANJI_N2_DECK];
 
 const n2Kanji = (kanji: string) => KANJI_N2_DECK.items.find((item) => item.kanji === kanji)!;
 
 describe("kanji decks", () => {
-  it("lists the N3 kanji of kohi.vn and the N2 kanji of JLPTsensei once each, numbered in order", () => {
-    expect(KANJI_N3_DECK.items).toHaveLength(416);
-    expect(KANJI_N2_DECK.items).toHaveLength(374);
-    for (const deck of [KANJI_N3_DECK, KANJI_N2_DECK]) {
+  it("lists the N3 kanji of kohi.vn and the N5, N4, N2 kanji of JLPTsensei once each, numbered in order", () => {
+    expect(DECKS.map((deck) => deck.items.length)).toEqual([80, 167, 416, 374]);
+    for (const deck of DECKS) {
       expect(new Set(deck.items.map((item) => item.kanji)).size).toBe(deck.items.length);
       expect(deck.items.map((item) => item.stt)).toEqual(deck.items.map((_, index) => index + 1));
     }
@@ -16,7 +17,7 @@ describe("kanji decks", () => {
   });
 
   it("gives every kanji a Hán Việt, the N3 one for a kanji of both lists", () => {
-    for (const deck of [KANJI_N3_DECK, KANJI_N2_DECK]) {
+    for (const deck of DECKS) {
       expect(deck.items.filter((item) => !item.han_viet || item.han_viet.includes("?"))).toEqual([]);
     }
     const n3 = new Map(KANJI_N3_DECK.items.map((item) => [item.kanji, item.han_viet]));
@@ -26,6 +27,9 @@ describe("kanji decks", () => {
     expect(n2Kanji("比").han_viet).toBe("TỈ");
     // Read from the kanji table, with the reading of the Japanese kanji.
     expect(n2Kanji("県").han_viet).toBe("HUYỆN");
+    expect(KANJI_N5_DECK.items.slice(0, 3).map((item) => `${item.kanji} ${item.han_viet}`)).toEqual(["日 NHẬT", "一 NHẤT", "国 QUỐC"]);
+    // KANJIDIC2 overridden by scripts/build_han_viet_data.py.
+    expect(KANJI_N4_DECK.items.find((item) => item.kanji === "料")!.han_viet).toBe("LIỆU");
     // Typos of kohi.vn corrected by scripts/crawl_kanji.py.
     expect(KANJI_N3_DECK.items.find((item) => item.kanji === "陽")!.han_viet).toBe("DƯƠNG");
   });
@@ -48,5 +52,19 @@ describe("kanji decks", () => {
       if (N2_DECK.items.some((word) => word.kanji.includes(item.kanji))) expect(N2_DECK.items).toContain(examples[0]);
     }
     expect(KANJI_N2_DECK.examplesOf(n2Kanji("党")).length).toBeGreaterThan(0);
+  });
+
+  it("finds a kanji by its progress key and practices the kanji to review", () => {
+    const [first, second] = KANJI_N5_DECK.items;
+    expect(kanjiKey(second)).toBe("stt_2");
+    expect(KANJI_N5_DECK.itemByKey("stt_2")).toBe(second);
+    expect(KANJI_N5_DECK.itemByKey("stt_999")).toBeUndefined();
+
+    expect(KANJI_N5_DECK.getBatchItems(UNREMEMBERED_BATCH_KEY, [second, first])).toEqual([second, first]);
+    expect(KANJI_N5_DECK.getBatchTitle(UNREMEMBERED_BATCH_KEY)).toBe("Kanji N5 chưa nhớ");
+    expect(KANJI_N5_DECK.getBatchItems("kanji_1", [second])).toHaveLength(KANJI_BATCH_SIZE);
+    expect(KANJI_N5_DECK.getBatchTitle("kanji_1")).toBe("Kanji N5 – Bài 1");
+    // N5 kanji are shown with N5 words first.
+    expect(N5_DECK.items).toContain(KANJI_N5_DECK.examplesOf(first)[0]);
   });
 });

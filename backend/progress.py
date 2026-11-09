@@ -1,17 +1,19 @@
 """Progress of a learner: word statuses and flashcards of each JLPT level, merged entry by entry.
 
-The progress of a deck (level) is
+A deck is the words of a level ("n3") or its single kanji ("n3Kanji"). Its progress is
     {"words": {key: {"s": "u" | "k", "t": ms}},
      "cards": {key: {"box": int, "due": int, "reviews": int, "lapses": int, "t": ms}}}
-where `key` is the "stt_<number>" of a word of the level, "u" a word to review (chưa nhớ),
-"k" a remembered word (đã nhớ), and `t` when the entry last changed (epoch milliseconds).
+where `key` is the "stt_<number>" of a word (or kanji) of the deck, "u" one to review (chưa nhớ),
+"k" a remembered one (đã nhớ), and `t` when the entry last changed (epoch milliseconds).
 Two copies merge entry by entry, the most recent `t` winning, so changes made on several
 devices are all kept. frontend/src/utils/progress.ts merges with the same rule.
 """
 
 import re
 
-DECKS = ("n5", "n4", "n3", "n2")
+LEVELS = ("n5", "n4", "n3", "n2")
+# The words of every level, then its single kanji.
+DECKS = LEVELS + tuple(f"{level}Kanji" for level in LEVELS)
 SECTIONS = ("words", "cards")
 STATUSES = ("u", "k")
 

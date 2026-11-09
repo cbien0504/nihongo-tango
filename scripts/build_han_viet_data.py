@@ -95,6 +95,8 @@ OVERRIDES = {
     "浜": "TÂN",
     # Kanji of the N5 and N4 vocabulary.
     "飲": "ẨM",
+    # 給料 is written CẤP LIÊU in the Mimikara N3 data, its only word with 料.
+    "料": "LIỆU",
     # Kanji of the N2 exam quizzes.
     "陥": "HÃM",
     # Kanji of the kanji lists: the reading of the Japanese kanji.

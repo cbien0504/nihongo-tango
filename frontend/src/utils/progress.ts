@@ -1,6 +1,9 @@
-import type { DeckId, DeckProgress } from "../types/progress";
+import type { DeckId, DeckProgress, KanjiProgressId, ProgressDeckId } from "../types/progress";
 
 export const DECK_IDS: readonly DeckId[] = ["n5", "n4", "n3", "n2"];
+export const kanjiProgressId = (deck: DeckId): KanjiProgressId => `${deck}Kanji`;
+/** Every deck of progress synced with the server (backend/progress.py DECKS): the words of each level, then its kanji. */
+export const PROGRESS_DECK_IDS: readonly ProgressDeckId[] = [...DECK_IDS, ...DECK_IDS.map(kanjiProgressId)];
 export const EMPTY_DECK: DeckProgress = { words: {}, cards: {} };
 
 // Same rules as backend/progress.py.

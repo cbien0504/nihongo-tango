@@ -12,7 +12,7 @@ export default defineConfig({
     },
   },
   build: {
-    // The vocab-data chunk is the word lists of N5–N2, the kanji of N3 and N2 and the exam papers (~1.3 MB, ~290 kB gzipped).
+    // The vocab-data chunk is the word lists and kanji of N5–N2 and the exam papers (~1.3 MB, ~290 kB gzipped).
     chunkSizeWarningLimit: 1400,
     rolldownOptions: {
       output: {

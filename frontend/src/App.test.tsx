@@ -1,6 +1,7 @@
 import { render, screen, fireEvent, within, waitFor } from "@testing-library/react";
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import App from "./App";
+import { KANJI_N3_DECK } from "./data/kanjiDecks";
 import { N2_DECK, N3_DECK, N4_DECK, N5_DECK, getItemKey } from "./data/vocabDecks";
 import { serveFakeApi } from "./test/fakeApi";
 import type { DeckId, DeckProgress, WordStatus } from "./types/progress";
@@ -502,7 +503,7 @@ describe("JLPT levels and their sections", () => {
     expect(localStorage.getItem("mimikara_level")).toBe("n5");
     expect(shownPanels()).toEqual(["level-n5", "panel-n5-vocab"]);
     const sections = within(screen.getByRole("tablist", { name: "Mục học N5" })).getAllByRole("tab");
-    expect(sections.map((tab) => tab.textContent)).toEqual(["📖 Từ vựng"]);
+    expect(sections.map((tab) => tab.textContent)).toEqual(["📖 Từ vựng", "🈶 Kanji"]);
 
     fireEvent.click(levelTab("N3"));
     expect(shownPanels()).toEqual(["level-n3", "panel-n3-exam"]);
@@ -523,7 +524,7 @@ describe("JLPT levels and their sections", () => {
     expect(screen.getByText("漢字読み", { selector: "h2 span" })).toBeInTheDocument();
   });
 
-  it("practices the single kanji of N3 and N2 in a section of their own", () => {
+  it("practices the single kanji of every level in a section of their own", () => {
     render(<App />);
     const sectionsOf = (level: string) =>
       within(screen.getByRole("tablist", { name: `Mục học ${level}` }))
@@ -543,7 +544,10 @@ describe("JLPT levels and their sections", () => {
     expect(sectionsOf("N2")).toEqual(["📖 Từ vựng", "🈶 Kanji", "📝 Luyện đề"]);
     expect(shownPanels()).toEqual(["level-n2", "panel-n2-kanji"]);
     fireEvent.click(levelTab("N5"));
-    expect(shownPanels()).toEqual(["level-n5", "panel-n5-vocab"]);
+    expect(sectionsOf("N5")).toEqual(["📖 Từ vựng", "🈶 Kanji"]);
+    expect(shownPanels()).toEqual(["level-n5", "panel-n5-kanji"]);
+    fireEvent.click(levelTab("N4"));
+    expect(shownPanels()).toEqual(["level-n4", "panel-n4-kanji"]);
   });
 
   it("opens the level saved in localStorage", () => {
@@ -810,6 +814,28 @@ describe("Accounts and the progress of each learner", () => {
     await waitFor(() => expect(Object.keys(api.accounts[USER].progress.n3?.words ?? {})).toHaveLength(1));
     const [[, init]] = api.fetch.mock.calls.filter(([url]) => url === `/api/users/${USER}/progress/n3`);
     expect(init).toMatchObject({ method: "PATCH", keepalive: true });
+  });
+
+  it("saves the kanji to review apart from the words of the level", async () => {
+    const api = serveFakeApi({ [USER]: { password: PASSWORD, progress: {} } }, USER);
+    localStorage.setItem("mimikara_user", USER);
+    localStorage.setItem("mimikara_section", "kanji");
+    render(<App />);
+    expect(await screen.findByText("Đã lưu")).toBeInTheDocument();
+
+    const kanjiPanel = document.getElementById("panel-n3-kanji")!;
+    const shown = kanjiPanel.querySelector(".word-main")!.textContent;
+    const reading = KANJI_N3_DECK.items.find((item) => item.kanji === shown)!.han_viet;
+    const wrong = Array.from(kanjiPanel.querySelectorAll<HTMLElement>(".option")).find(
+      (option) => option.querySelector(".option-text")!.textContent !== reading
+    )!;
+    fireEvent.click(wrong);
+    expect(within(kanjiPanel).getByRole("button", { name: /Kanji chưa nhớ/ })).toHaveTextContent("1");
+
+    Object.defineProperty(document, "visibilityState", { value: "hidden", configurable: true });
+    document.dispatchEvent(new Event("visibilitychange"));
+    await waitFor(() => expect(Object.keys(api.accounts[USER].progress.n3Kanji?.words ?? {})).toHaveLength(1));
+    expect(api.accounts[USER].progress.n3).toBeUndefined();
   });
 
   it("moves the progress saved before logins existed into the learner's progress", async () => {

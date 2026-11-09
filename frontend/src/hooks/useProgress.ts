@@ -1,5 +1,5 @@
 import { createContext, useContext, useSyncExternalStore } from "react";
-import type { DeckId, DeckProgress } from "../types/progress";
+import type { DeckProgress, ProgressDeckId } from "../types/progress";
 import type { ProgressStore, SyncStatus } from "../utils/progressStore";
 
 /** The progress store of the logged-in learner (components/user/ProgressProvider). */
@@ -11,8 +11,8 @@ export function useProgressStore(): ProgressStore {
   return store;
 }
 
-/** Word statuses and flashcards of a deck; re-renders when they change. */
-export function useDeckProgress(deck: DeckId): DeckProgress {
+/** Word (or kanji) statuses and flashcards of a deck; re-renders when they change. */
+export function useDeckProgress(deck: ProgressDeckId): DeckProgress {
   const store = useProgressStore();
   return useSyncExternalStore(store.subscribe, () => store.getDeck(deck));
 }

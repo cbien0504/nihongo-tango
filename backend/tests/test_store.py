@@ -54,9 +54,10 @@ class ProgressTableTest(unittest.TestCase):
         self.table.create_profile("bien", "hash", NOW)
         self.table.create_session("bien", "abc", NOW, 1_900_000_000)
         self.table.save_deck("bien", "n5", {"words": {"stt_1": {"s": "k", "t": T}}, "cards": {}}, SUMMARY, 0, NOW)
+        self.table.save_deck("bien", "n5Kanji", {"words": {"stt_1": {"s": "u", "t": T}}, "cards": {}}, SUMMARY, 0, NOW)
 
         self.assertEqual(self.table.get_session("bien", "abc")["expiresAt"], 1_900_000_000)
-        self.assertEqual(list(self.table.load_decks("bien")), ["n5"])
+        self.assertEqual(sorted(self.table.load_decks("bien")), ["n5", "n5Kanji"])
         self.table.delete_session("bien", "abc")
         self.assertIsNone(self.table.get_session("bien", "abc"))
 

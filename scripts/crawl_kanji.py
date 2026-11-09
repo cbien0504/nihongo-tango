@@ -1,21 +1,22 @@
-"""Crawl the single kanji of JLPT N3 and N2 studied in the Kanji section of the app.
+"""Crawl the single kanji of JLPT N5 to N2 studied in the Kanji section of the app.
 
 Usage (from the repo root):
-    python3 scripts/crawl_kanji.py
+    python3 scripts/crawl_kanji.py [LEVEL...]     # LEVEL: n5, n4, n3, n2; every level without
 
   - N3: the table of https://kohi.vn/blog/tong-hop-kanji-n3-day-du-nhat-nigbu, kanji with
     their Hán Việt and Vietnamese meaning. The page is rendered by Nuxt: the table is HTML
     escaped inside a script.
-  - N2: the list of https://jlptsensei.com/jlpt-n2-kanji-list/ (pages 1 to 4, 100 kanji each).
-    Only the kanji are kept: their meaning is English, and the app reads their Hán Việt in
-    frontend/src/data/kanji_han_viet.json.
-The on and kun readings are left out. Writes frontend/src/data/kanji_n3.json and kanji_n2.json;
-run scripts/build_han_viet_data.py afterwards so every N2 kanji has a Hán Việt reading.
+  - N5, N4, N2: the lists of JLPTsensei, e.g. https://jlptsensei.com/jlpt-n2-kanji-list/
+    (100 kanji a page). Only the kanji are kept: their meaning is English, and the app reads
+    their Hán Việt in frontend/src/data/kanji_han_viet.json.
+The on and kun readings are left out. Writes frontend/src/data/kanji_<level>.json; run
+scripts/build_han_viet_data.py afterwards so every kanji has a Hán Việt reading.
 """
 
 import html
 import json
 import re
+import sys
 import time
 import unicodedata
 import urllib.request
@@ -34,9 +35,9 @@ KOHI_URL = "https://kohi.vn/blog/tong-hop-kanji-n3-day-du-nhat-nigbu"
 KOHI_HEADER = ["STT", "Kanji", "Âm Hán Việt", "Nghĩa", "Âm On", "Âm Kun"]
 # Readings of kohi.vn that are typos (DUƠNG), Vietnamese words (THAN, BẢNG) or rarely used (SỔ).
 KOHI_CORRECTIONS = {"陽": "DƯƠNG", "板": "BẢN", "数": "SỐ", "炭": "THÁN"}
-SENSEI_URL = "https://jlptsensei.com/jlpt-n2-kanji-list/"
-# The first page is the list itself: /page/1/ only answers a placeholder.
-SENSEI_PAGES = [SENSEI_URL] + [f"{SENSEI_URL}page/{page}/" for page in range(2, 5)]
+SENSEI_URL = "https://jlptsensei.com/jlpt-{level}-kanji-list/"
+# Pages of each list of JLPTsensei: 80 kanji in N5, 167 in N4, 374 in N2.
+SENSEI_PAGE_COUNTS = {"N5": 1, "N4": 2, "N2": 4}
 
 BACKSLASH = "\\"
 JS_ESCAPE_RE = re.compile(re.escape(BACKSLASH) + "u([0-9A-Fa-f]{4})")
@@ -89,9 +90,15 @@ def crawl_n3() -> list[dict]:
     return kanji
 
 
-def crawl_n2() -> list[dict]:
+def sensei_pages(level: str) -> list[str]:
+    url = SENSEI_URL.format(level=level.lower())
+    # The first page is the list itself: /page/1/ only answers a placeholder.
+    return [url] + [f"{url}page/{page}/" for page in range(2, SENSEI_PAGE_COUNTS[level] + 1)]
+
+
+def crawl_sensei(level: str) -> list[dict]:
     kanji = []
-    for url in SENSEI_PAGES:
+    for url in sensei_pages(level):
         time.sleep(PAUSE_SECONDS)
         page = fetch(url)
         table = page[page.find('<table id="jl-kanji"') :]
@@ -118,8 +125,15 @@ def write(level: str, title: str, source: str, kanji: list[dict]) -> None:
 
 
 def main() -> None:
-    write("N3", "Tổng hợp Kanji N3 đầy đủ nhất", f"kohi.vn – {KOHI_URL}", crawl_n3())
-    write("N2", "JLPT N2 Kanji List", "JLPTsensei.com – https://jlptsensei.com/jlpt-n2-kanji-list/", crawl_n2())
+    levels = [arg.upper() for arg in sys.argv[1:]] or ["N5", "N4", "N3", "N2"]
+    for level in levels:
+        if level == "N3":
+            write("N3", "Tổng hợp Kanji N3 đầy đủ nhất", f"kohi.vn – {KOHI_URL}", crawl_n3())
+        elif level in SENSEI_PAGE_COUNTS:
+            source = f"JLPTsensei.com – {SENSEI_URL.format(level=level.lower())}"
+            write(level, f"JLPT {level} Kanji List", source, crawl_sensei(level))
+        else:
+            raise SystemExit(__doc__)
 
 
 if __name__ == "__main__":

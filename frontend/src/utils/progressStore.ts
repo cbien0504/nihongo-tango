@@ -1,5 +1,5 @@
-import type { DeckId, DeckProgress, Progress, WordStatus } from "../types/progress";
-import { DECK_IDS, EMPTY_DECK, mergeDeck } from "./progress";
+import type { DeckProgress, Progress, ProgressDeckId, WordStatus } from "../types/progress";
+import { EMPTY_DECK, PROGRESS_DECK_IDS, mergeDeck } from "./progress";
 import { ApiError, progressApi, type ProgressApi } from "./progressApi";
 import type { SrsCard } from "./srs";
 
@@ -24,7 +24,7 @@ const REFRESH_INTERVAL_MS = 60_000;
 interface Cache {
   decks: Progress;
   /** Keys changed on this device and not saved on the server yet. */
-  dirty: Partial<Record<DeckId, Record<Section, string[]>>>;
+  dirty: Partial<Record<ProgressDeckId, Record<Section, string[]>>>;
 }
 
 const pick = <E>(entries: Record<string, E>, keys: Set<string>): Record<string, E> =>
@@ -39,8 +39,8 @@ export class ProgressStore {
   readonly username: string;
   private readonly api: ProgressApi;
   private readonly storage: Storage;
-  private decks: Record<DeckId, DeckProgress>;
-  private dirty: Record<DeckId, Record<Section, Set<string>>>;
+  private decks: Record<ProgressDeckId, DeckProgress>;
+  private dirty: Record<ProgressDeckId, Record<Section, Set<string>>>;
   private status: SyncStatus = "loading";
   private state: "idle" | "running" | "disposed" = "idle";
   private listeners = new Set<() => void>();
@@ -57,13 +57,13 @@ export class ProgressStore {
     this.api = api;
     this.storage = storage;
     const cache = this.readCache();
-    this.decks = Object.fromEntries(DECK_IDS.map((deck) => [deck, cache.decks[deck] ?? EMPTY_DECK])) as Record<
-      DeckId,
+    this.decks = Object.fromEntries(PROGRESS_DECK_IDS.map((deck) => [deck, cache.decks[deck] ?? EMPTY_DECK])) as Record<
+      ProgressDeckId,
       DeckProgress
     >;
     this.dirty = Object.fromEntries(
-      DECK_IDS.map((deck) => [deck, { words: new Set(cache.dirty[deck]?.words), cards: new Set(cache.dirty[deck]?.cards) }])
-    ) as Record<DeckId, Record<Section, Set<string>>>;
+      PROGRESS_DECK_IDS.map((deck) => [deck, { words: new Set(cache.dirty[deck]?.words), cards: new Set(cache.dirty[deck]?.cards) }])
+    ) as Record<ProgressDeckId, Record<Section, Set<string>>>;
   }
 
   /** Downloads the saved progress, then keeps sending the changes of this device. */
@@ -83,7 +83,7 @@ export class ProgressStore {
     return () => this.listeners.delete(listener);
   };
 
-  getDeck = (deck: DeckId): DeckProgress => this.decks[deck];
+  getDeck = (deck: ProgressDeckId): DeckProgress => this.decks[deck];
 
   getStatus = (): SyncStatus => this.status;
 
@@ -93,19 +93,19 @@ export class ProgressStore {
   }
 
   /** Sets the status of a word; false when it already had it. */
-  setWordStatus(deck: DeckId, key: string, status: WordStatus): boolean {
+  setWordStatus(deck: ProgressDeckId, key: string, status: WordStatus): boolean {
     if (this.decks[deck].words[key]?.s === status) return false;
     this.update(deck, { words: { [key]: { s: status, t: this.nextTime() } } });
     return true;
   }
 
-  setCard(deck: DeckId, key: string, card: SrsCard): void {
+  setCard(deck: ProgressDeckId, key: string, card: SrsCard): void {
     this.update(deck, { cards: { [key]: { ...card, t: this.nextTime() } } });
   }
 
   /** Adds the entries this learner has no progress for yet, e.g. progress saved before logins existed. */
   addMissing(progress: Progress): void {
-    for (const deck of DECK_IDS) {
+    for (const deck of PROGRESS_DECK_IDS) {
       const current = this.decks[deck];
       const missing = <S extends Section>(section: S) =>
         Object.fromEntries(
@@ -143,12 +143,12 @@ export class ProgressStore {
   }
 
   hasUnsavedChanges(): boolean {
-    return DECK_IDS.some((deck) => SECTIONS.some((section) => this.dirty[deck][section].size > 0));
+    return PROGRESS_DECK_IDS.some((deck) => SECTIONS.some((section) => this.dirty[deck][section].size > 0));
   }
 
   private async push(keepalive: boolean): Promise<void> {
     clearTimeout(this.timer);
-    for (const deck of DECK_IDS) {
+    for (const deck of PROGRESS_DECK_IDS) {
       const dirty = this.dirty[deck];
       if (!dirty.words.size && !dirty.cards.size) continue;
       const current = this.decks[deck];
@@ -169,7 +169,7 @@ export class ProgressStore {
   }
 
   /** Forgets the entries saved by a request, unless they changed while it was on its way. */
-  private clean(deck: DeckId, sent: DeckProgress): void {
+  private clean(deck: ProgressDeckId, sent: DeckProgress): void {
     for (const section of SECTIONS) {
       for (const [key, entry] of Object.entries(sent[section])) {
         if (this.decks[deck][section][key] === entry) this.dirty[deck][section].delete(key);
@@ -193,7 +193,7 @@ export class ProgressStore {
   }
 
   private mergeRemote(progress: Progress): void {
-    for (const deck of DECK_IDS) {
+    for (const deck of PROGRESS_DECK_IDS) {
       const remote = progress[deck];
       if (remote) this.decks = { ...this.decks, [deck]: mergeDeck(this.decks[deck], remote) };
     }
@@ -201,7 +201,7 @@ export class ProgressStore {
     this.emit();
   }
 
-  private update(deck: DeckId, changes: Partial<DeckProgress>): void {
+  private update(deck: ProgressDeckId, changes: Partial<DeckProgress>): void {
     const keys = SECTIONS.flatMap((section) => Object.keys(changes[section] ?? {}).map((key) => [section, key] as const));
     if (keys.length === 0) return;
     const current = this.decks[deck];
@@ -243,7 +243,7 @@ export class ProgressStore {
   private persist(): void {
     if (this.state === "disposed") return;
     const dirty = Object.fromEntries(
-      DECK_IDS.map((deck) => [deck, { words: [...this.dirty[deck].words], cards: [...this.dirty[deck].cards] }])
+      PROGRESS_DECK_IDS.map((deck) => [deck, { words: [...this.dirty[deck].words], cards: [...this.dirty[deck].cards] }])
     );
     try {
       this.storage.setItem(progressStorageKey(this.username), JSON.stringify({ decks: this.decks, dirty }));

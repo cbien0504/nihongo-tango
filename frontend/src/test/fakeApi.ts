@@ -1,5 +1,5 @@
 import { vi } from "vitest";
-import type { DeckId, Progress } from "../types/progress";
+import type { Progress, ProgressDeckId } from "../types/progress";
 import { EMPTY_DECK, mergeDeck } from "../utils/progress";
 
 interface Account {
@@ -41,7 +41,7 @@ export function serveFakeApi(accounts: Record<string, Account> = {}, session: st
     if (server.session !== username) return answer(401, { error: "unauthenticated", message: "Hãy đăng nhập lại" });
     const { progress } = server.accounts[username];
     if (!deck) return answer(200, { username, progress });
-    progress[deck as DeckId] = mergeDeck(progress[deck as DeckId] ?? EMPTY_DECK, body);
+    progress[deck as ProgressDeckId] = mergeDeck(progress[deck as ProgressDeckId] ?? EMPTY_DECK, body);
     return answer(200, { deck, summary: {} });
   });
 
