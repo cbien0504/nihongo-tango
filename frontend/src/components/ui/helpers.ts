@@ -1,5 +1,8 @@
 import type { Companion } from "../../types/quiz";
 
+/** Rows of a long word list rendered at first, and added by each "Xem thêm": every word to review is a lot of rows. */
+export const LIST_PAGE_SIZE = 100;
+
 export type Tone = "primary" | "success" | "warning" | "danger" | "info";
 
 export type OptionState = "idle" | "selected" | "correct" | "wrong" | "dimmed";

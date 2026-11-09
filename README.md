@@ -11,14 +11,14 @@ A **React** study app for JLPT vocabulary, hosted on **S3 + CloudFront (OAC)** w
 The app is organized by JLPT level (N5 · N4 · N3 · N2), each level with its own sections:
 
 - **📖 Từ vựng** (every level) – the N5, N4 and N2 lists of jtest.net and Mimikara Oboeru N3, practiced as a multiple-choice quiz or as spaced-repetition flashcards. Every answer also teaches its companion words (自動詞/他動詞 pair, synonyms, antonyms) and Hán Việt.
-- **🈶 Kanji** (every level) – the single kanji of N5 (80), N4 (167) and N2 (374) of JLPTsensei and N3 (kohi.vn, 416) with their Hán Việt, practiced as a multiple-choice quiz: Kanji → Hán Việt or Hán Việt → Kanji, by lessons of 20 kanji. Like words, kanji are marked Chưa nhớ (to review) or Đã nhớ (remembered).
+- **🈶 Kanji** (every level) – the single kanji of N5 (80), N4 (167) and N2 (374) of JLPTsensei and N3 (kohi.vn, 416) with their Hán Việt, practiced as a multiple-choice quiz: Kanji → Hán Việt or Hán Việt → Kanji, by lessons of 20 kanji. Like words, a kanji is Đã nhớ (remembered) once the learner marks it so, Chưa nhớ (to review) otherwise.
 - **📝 Luyện đề** (N3, N2) – JLPT N3 文字・語彙 exam papers generated from `JLPT_N3_tu_vung_Minchan.docx`, and the 26 N2 vocabulary quizzes of jtest.net with the explanation of every answer.
 
 Learners **register** (a username not taken yet and a password) or **log in** (the password is checked). Each account has its own progress in every level: words and kanji to review (chưa nhớ), remembered words and kanji (đã nhớ) and flashcards. The progress is cached in the browser, so studying works offline, and saved in DynamoDB, so it follows the learner to any device. Display settings stay per device in `localStorage`. See [frontend/README.md](frontend/README.md) for features, structure and how the data is built.
 
 ### 👥 Level of each learner
 
-The DynamoDB table (stack output `ProgressTableName`) has one `profile` item per learner. In the AWS Console, open **DynamoDB → Explore items**, pick the table, then **Scan** with the filter `record` = `profile`: every row is a learner with `lastSeenAt` and, per level, `n5Known` / `n5Unremembered` … `n2Known` / `n2Unremembered` (remembered words and words to review; the levels have 1047, 894, 880 and 1546 words), then `n5KanjiKnown` / `n5KanjiUnremembered` … for the kanji. The items `n5` … `n2` of a learner hold the details of each level (`words`, `cards` as JSON), the items `n5Kanji` … `n2Kanji` those of its kanji.
+The DynamoDB table (stack output `ProgressTableName`) has one `profile` item per learner. In the AWS Console, open **DynamoDB → Explore items**, pick the table, then **Scan** with the filter `record` = `profile`: every row is a learner with `lastSeenAt` and, per level, `n5Known` / `n5Unremembered` … `n2Known` / `n2Unremembered` (remembered words, and words answered wrong or marked Chưa nhớ; the app counts every word not remembered as to review, out of 1047, 894, 880 and 1546 words), then `n5KanjiKnown` / `n5KanjiUnremembered` … for the kanji. The items `n5` … `n2` of a learner hold the details of each level (`words`, `cards` as JSON), the items `n5Kanji` … `n2Kanji` those of its kanji.
 
 ### 🔐 Passwords and sessions
 

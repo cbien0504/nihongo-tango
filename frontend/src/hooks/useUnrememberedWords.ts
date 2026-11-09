@@ -8,9 +8,10 @@ import { useDeckProgress, useProgressStore } from "./useProgress";
 type MaybeItem = VocabItem | null | undefined;
 
 /**
- * Words of a deck the learner has to review (`words`, chưa nhớ) and has remembered (`known`, đã nhớ),
- * in the order they were marked. They belong to the logged-in learner (see utils/progressStore).
- * A word is remembered only when the learner marks it so; a wrong answer marks it to review.
+ * Words of a deck the learner has to review (`words`, chưa nhớ) and has remembered (`known`, đã nhớ).
+ * They belong to the logged-in learner (see utils/progressStore). A word is remembered only when the
+ * learner marks it so; every other word is to review, those answered wrong or marked Chưa nhớ first
+ * (in the order they were marked), then the words never marked in the order of the list.
  */
 export function useUnrememberedWords(deck: VocabDeck) {
   const store = useProgressStore();
@@ -23,12 +24,14 @@ export function useUnrememberedWords(deck: VocabDeck) {
       if (item) lists[entry.s].push({ t: entry.t, item });
     }
     const ordered = (list: { t: number; item: VocabItem }[]) => list.sort((a, b) => a.t - b.t).map(({ item }) => item);
-    return { words: ordered(lists.u), known: ordered(lists.k) };
+    const marked = ordered(lists.u);
+    const isMarked = new Set([...marked, ...lists.k.map(({ item }) => item)]);
+    return { words: [...marked, ...deck.items.filter((item) => !isMarked.has(item))], known: ordered(lists.k) };
   }, [deck, entries]);
 
-  /** Status of a word; `undefined` while it was never marked. */
+  /** Status of a word: a word never marked is to review ("u") too. */
   const statusOf = useCallback(
-    (item: MaybeItem): WordStatus | undefined => (item ? entries[getItemKey(item)]?.s : undefined),
+    (item: MaybeItem): WordStatus | undefined => (item ? (entries[getItemKey(item)]?.s ?? "u") : undefined),
     [entries]
   );
 

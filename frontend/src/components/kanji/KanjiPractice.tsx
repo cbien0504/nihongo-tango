@@ -160,7 +160,7 @@ export default function KanjiPractice({ deck, active }: KanjiPracticeProps) {
       <ResultPanel
         icon="🎉"
         title="Danh sách Kanji chưa nhớ hiện đang trống!"
-        description="Chữ nào trả lời sai hoặc được đánh dấu Chưa nhớ (phím C) sẽ vào danh sách này để ôn lại."
+        description={`Bạn đã đánh dấu Đã nhớ mọi chữ Kanji ${deck.level}. Bấm “Chưa nhớ” (phím C) sau khi trả lời để ôn lại một chữ.`}
         actions={
           <button type="button" className="btn btn--primary" onClick={() => quiz.selectBatch(firstLesson.key)}>
             📖 Luyện {firstLesson.title}
@@ -208,7 +208,7 @@ export default function KanjiPractice({ deck, active }: KanjiPracticeProps) {
             <div className="feedback-body">
               <div className="feedback-title">
                 <span>{quiz.isCorrect ? "✅ Chính xác!" : "❌ Chưa chính xác!"}</span>
-                {!quiz.isCorrect && <span className="muted"> (tự động thêm vào danh sách Chưa nhớ)</span>}
+                {!quiz.isCorrect && <span className="muted"> (được ôn trước trong danh sách Chưa nhớ)</span>}
               </div>
               <KanjiAnswer deck={deck} item={question.item} />
               <WordMarkButtons
