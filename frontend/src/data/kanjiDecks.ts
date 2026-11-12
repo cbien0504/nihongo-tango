@@ -4,14 +4,14 @@ import kanjiN3Data from "./kanji_n3.json";
 import kanjiN2Data from "./kanji_n2.json";
 import type { DeckId } from "../types/progress";
 import type { VocabItem } from "../types/quiz";
-import { getHanViet } from "../utils/hanViet";
+import { HAN_VIET_SOURCE, getHanViet } from "../utils/hanViet";
 import { N2_DECK, N3_DECK, N4_DECK, N5_DECK, UNREMEMBERED_BATCH_KEY, type VocabDeck } from "./vocabDecks";
 
 export interface KanjiItem {
   stt: number;
   kanji: string;
   han_viet: string;
-  /** Vietnamese meaning; empty when the list has none (JLPTsensei lists N5, N4, N2 with English meanings). */
+  /** Vietnamese meaning; empty when the list has none (JLPTsensei lists N5 and N4 with English meanings). */
   meaning: string;
 }
 
@@ -27,6 +27,8 @@ export interface KanjiDeck {
   id: DeckId;
   level: string;
   source: string;
+  /** Where the Hán Việt comes from when the list has none; empty when the list gives it. */
+  hanVietSource: string;
   items: KanjiItem[];
   /** The kanji of a progress key (`kanjiKey`). */
   itemByKey: (key: string) => KanjiItem | undefined;
@@ -55,7 +57,8 @@ const createKanjiDeck = (
   level: string,
   source: string,
   items: KanjiItem[],
-  vocab: VocabDeck
+  vocab: VocabDeck,
+  hanVietSource = ""
 ): KanjiDeck => {
   const all: KanjiBatch = { key: "all", title: `Tất cả Kanji ${level}`, label: `📚 Tất cả (${items.length} chữ Kanji ${level})`, items };
   const lessons: KanjiBatch[] = [];
@@ -96,6 +99,7 @@ const createKanjiDeck = (
     id,
     level,
     source,
+    hanVietSource,
     items,
     itemByKey: (key) => byProgressKey.get(key),
     batches,
@@ -109,12 +113,19 @@ const createKanjiDeck = (
 const n3Items: KanjiItem[] = kanjiN3Data.kanji;
 const n3Readings = new Map(n3Items.map((item) => [item.kanji, item.han_viet]));
 
-// The lists of JLPTsensei have no Hán Việt: a kanji also listed in N3 keeps the reading it has
-// there, the others are read from the kanji table.
-const senseiItems = (list: { stt: number; kanji: string }[]): KanjiItem[] =>
-  list.map(({ stt, kanji }) => ({ stt, kanji, han_viet: n3Readings.get(kanji) ?? getHanViet(kanji), meaning: "" }));
+// The lists of JLPTsensei have no Hán Việt of their own (N2 has the Hán Việt and meaning of
+// tudienabc.com but for 坊): a kanji without one keeps the reading it has in N3, or is read from
+// the kanji table.
+const READINGS_OF_SENSEI = `theo Kanji N3 của kohi.vn, các chữ khác theo ${HAN_VIET_SOURCE}`;
+const senseiItems = (list: { stt: number; kanji: string; han_viet?: string; meaning?: string }[]): KanjiItem[] =>
+  list.map(({ stt, kanji, han_viet, meaning }) => ({
+    stt,
+    kanji,
+    han_viet: han_viet || n3Readings.get(kanji) || getHanViet(kanji),
+    meaning: meaning ?? "",
+  }));
 
-export const KANJI_N5_DECK = createKanjiDeck("n5", "N5", kanjiN5Data.source, senseiItems(kanjiN5Data.kanji), N5_DECK);
-export const KANJI_N4_DECK = createKanjiDeck("n4", "N4", kanjiN4Data.source, senseiItems(kanjiN4Data.kanji), N4_DECK);
+export const KANJI_N5_DECK = createKanjiDeck("n5", "N5", kanjiN5Data.source, senseiItems(kanjiN5Data.kanji), N5_DECK, READINGS_OF_SENSEI);
+export const KANJI_N4_DECK = createKanjiDeck("n4", "N4", kanjiN4Data.source, senseiItems(kanjiN4Data.kanji), N4_DECK, READINGS_OF_SENSEI);
 export const KANJI_N3_DECK = createKanjiDeck("n3", "N3", kanjiN3Data.source, n3Items, N3_DECK);
 export const KANJI_N2_DECK = createKanjiDeck("n2", "N2", kanjiN2Data.source, senseiItems(kanjiN2Data.kanji), N2_DECK);

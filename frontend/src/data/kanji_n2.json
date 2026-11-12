@@ -1,1503 +1,2251 @@
 {
  "level": "N2",
  "title": "JLPT N2 Kanji List",
- "source": "JLPTsensei.com – https://jlptsensei.com/jlpt-n2-kanji-list/",
+ "source": "JLPTsensei.com – https://jlptsensei.com/jlpt-n2-kanji-list/ · Hán Việt và nghĩa: tudienabc.com – https://www.tudienabc.com/nang-luc-nhat-ngu/kanji/trinh-do-N2/hoc-tieng-nhat-kanji-3",
  "kanji": [
   {
    "stt": 1,
-   "kanji": "党"
+   "kanji": "党",
+   "han_viet": "ĐẢNG",
+   "meaning": "đảng phái"
   },
   {
    "stt": 2,
-   "kanji": "協"
+   "kanji": "協",
+   "han_viet": "HIỆP",
+   "meaning": "hiệp lực"
   },
   {
    "stt": 3,
-   "kanji": "総"
+   "kanji": "総",
+   "han_viet": "TỔNG",
+   "meaning": "tổng số, tổng cộng"
   },
   {
    "stt": 4,
-   "kanji": "区"
+   "kanji": "区",
+   "han_viet": "KHU",
+   "meaning": "khu vực, địa khu"
   },
   {
    "stt": 5,
-   "kanji": "領"
+   "kanji": "領",
+   "han_viet": "LĨNH, LÃNH",
+   "meaning": "thống lĩnh, lãnh thổ, lĩnh vực"
   },
   {
    "stt": 6,
-   "kanji": "県"
+   "kanji": "県",
+   "han_viet": "HUYỆN",
+   "meaning": "huyện, tỉnh"
   },
   {
    "stt": 7,
-   "kanji": "設"
+   "kanji": "設",
+   "han_viet": "THIẾT",
+   "meaning": "thiết lập, kiến thiết"
   },
   {
    "stt": 8,
-   "kanji": "保"
+   "kanji": "保",
+   "han_viet": "BẢO",
+   "meaning": "bảo trì, bảo vệ, đảm bảo"
   },
   {
    "stt": 9,
-   "kanji": "改"
+   "kanji": "改",
+   "han_viet": "CẢI",
+   "meaning": "cải cách, cải chính"
   },
   {
    "stt": 10,
-   "kanji": "第"
+   "kanji": "第",
+   "han_viet": "ĐỆ",
+   "meaning": "đệ nhất, đệ nhị"
   },
   {
    "stt": 11,
-   "kanji": "結"
+   "kanji": "結",
+   "han_viet": "KẾT",
+   "meaning": "đoàn kết, kết thúc"
   },
   {
    "stt": 12,
-   "kanji": "派"
+   "kanji": "派",
+   "han_viet": "PHÁI",
+   "meaning": "trường phái"
   },
   {
    "stt": 13,
-   "kanji": "府"
+   "kanji": "府",
+   "han_viet": "PHỦ",
+   "meaning": "chính phủ"
   },
   {
    "stt": 14,
-   "kanji": "査"
+   "kanji": "査",
+   "han_viet": "TRA",
+   "meaning": "điều tra"
   },
   {
    "stt": 15,
-   "kanji": "委"
+   "kanji": "委",
+   "han_viet": "ỦY",
+   "meaning": "ủy viên, ủy ban, ủy thác"
   },
   {
    "stt": 16,
-   "kanji": "軍"
+   "kanji": "軍",
+   "han_viet": "QUÂN",
+   "meaning": "quân đội, quân sự"
   },
   {
    "stt": 17,
-   "kanji": "案"
+   "kanji": "案",
+   "han_viet": "ÁN",
+   "meaning": "luận án, đề án"
   },
   {
    "stt": 18,
-   "kanji": "策"
+   "kanji": "策",
+   "han_viet": "SÁCH",
+   "meaning": "đối sách"
   },
   {
    "stt": 19,
-   "kanji": "団"
+   "kanji": "団",
+   "han_viet": "ĐOÀN",
+   "meaning": "đoàn kết, đoàn đội"
   },
   {
    "stt": 20,
-   "kanji": "各"
+   "kanji": "各",
+   "han_viet": "CÁC",
+   "meaning": "các, mỗi"
   },
   {
    "stt": 21,
-   "kanji": "島"
+   "kanji": "島",
+   "han_viet": "ĐẢO",
+   "meaning": "hải đảo"
   },
   {
    "stt": 22,
-   "kanji": "革"
+   "kanji": "革",
+   "han_viet": "CÁCH",
+   "meaning": "da thuộc, cách mạng"
   },
   {
    "stt": 23,
-   "kanji": "村"
+   "kanji": "村",
+   "han_viet": "THÔN",
+   "meaning": "thôn xã, thôn làng"
   },
   {
    "stt": 24,
-   "kanji": "勢"
+   "kanji": "勢",
+   "han_viet": "THẾ",
+   "meaning": "tư thế, thế lực"
   },
   {
    "stt": 25,
-   "kanji": "減"
+   "kanji": "減",
+   "han_viet": "GIẢM",
+   "meaning": "gia giảm, giảm"
   },
   {
    "stt": 26,
-   "kanji": "再"
+   "kanji": "再",
+   "han_viet": "TÁI",
+   "meaning": "lại, tái phát"
   },
   {
    "stt": 27,
-   "kanji": "税"
+   "kanji": "税",
+   "han_viet": "THUẾ",
+   "meaning": "thuế vụ"
   },
   {
    "stt": 28,
-   "kanji": "営"
+   "kanji": "営",
+   "han_viet": "DOANH",
+   "meaning": "doanh nghiệp, kinh doanh, doanh trại"
   },
   {
    "stt": 29,
-   "kanji": "比"
+   "kanji": "比",
+   "han_viet": "TỈ",
+   "meaning": "so sánh, tỉ lệ, tỉ dụ"
   },
   {
    "stt": 30,
-   "kanji": "防"
+   "kanji": "防",
+   "han_viet": "PHÒNG",
+   "meaning": "phòng vệ, phòng bị, đề phòng"
   },
   {
    "stt": 31,
-   "kanji": "補"
+   "kanji": "補",
+   "han_viet": "BỔ",
+   "meaning": "bổ sung, bổ túc"
   },
   {
    "stt": 32,
-   "kanji": "境"
+   "kanji": "境",
+   "han_viet": "CẢNH",
+   "meaning": "nhập cảnh, quá cảnh, cảnh ngộ"
   },
   {
    "stt": 33,
-   "kanji": "導"
+   "kanji": "導",
+   "han_viet": "ĐẠO",
+   "meaning": "dẫn đường, chỉ đạo"
   },
   {
    "stt": 34,
-   "kanji": "副"
+   "kanji": "副",
+   "han_viet": "PHÓ",
+   "meaning": "phó, phó phòng"
   },
   {
    "stt": 35,
-   "kanji": "算"
+   "kanji": "算",
+   "han_viet": "TOÁN",
+   "meaning": "tính toán, kế toán, toán học"
   },
   {
    "stt": 36,
-   "kanji": "輸"
+   "kanji": "輸",
+   "han_viet": "THÂU",
+   "meaning": "thâu nhập, thâu xuất"
   },
   {
    "stt": 37,
-   "kanji": "述"
+   "kanji": "述",
+   "han_viet": "THUẬT",
+   "meaning": "tường thuật. tự thuật"
   },
   {
    "stt": 38,
-   "kanji": "線"
+   "kanji": "線",
+   "han_viet": "TUYẾN",
+   "meaning": "dây, tiền tuyến, điện tuyến, vô tuyến"
   },
   {
    "stt": 39,
-   "kanji": "農"
+   "kanji": "農",
+   "han_viet": "NÔNG",
+   "meaning": "nông nghiệp, nông thôn, nông dân"
   },
   {
    "stt": 40,
-   "kanji": "州"
+   "kanji": "州",
+   "han_viet": "CHÂU",
+   "meaning": "tỉnh, bang, châu lục"
   },
   {
    "stt": 41,
-   "kanji": "武"
+   "kanji": "武",
+   "han_viet": "VŨ",
+   "meaning": "vũ trang, vũ lực"
   },
   {
    "stt": 42,
-   "kanji": "象"
+   "kanji": "象",
+   "han_viet": "TƯỢNG",
+   "meaning": "hiện tượng, khí tượng, hình tượng"
   },
   {
    "stt": 43,
-   "kanji": "域"
+   "kanji": "域",
+   "han_viet": "VỰC",
+   "meaning": "khu vực, lĩnh vực"
   },
   {
    "stt": 44,
-   "kanji": "額"
+   "kanji": "額",
+   "han_viet": "NGẠCH",
+   "meaning": "trán, giá tiền, hạn ngạch, kim ngạch"
   },
   {
    "stt": 45,
-   "kanji": "欧"
+   "kanji": "欧",
+   "han_viet": "ÂU",
+   "meaning": "châu âu"
   },
   {
    "stt": 46,
-   "kanji": "担"
+   "kanji": "担",
+   "han_viet": "ĐẢM",
+   "meaning": "đảm đương, đảm bảo"
   },
   {
    "stt": 47,
-   "kanji": "準"
+   "kanji": "準",
+   "han_viet": "CHUẨN",
+   "meaning": "tiêu chuẩn, chuẩn bị"
   },
   {
    "stt": 48,
-   "kanji": "賞"
+   "kanji": "賞",
+   "han_viet": "THƯỞNG",
+   "meaning": "giải thưởng, tưởng thưởng"
   },
   {
    "stt": 49,
-   "kanji": "辺"
+   "kanji": "辺",
+   "han_viet": "BIÊN",
+   "meaning": "biên, biên giới"
   },
   {
    "stt": 50,
-   "kanji": "造"
+   "kanji": "造",
+   "han_viet": "TẠO",
+   "meaning": "chế tạo, sáng tạo"
   },
   {
    "stt": 51,
-   "kanji": "被"
+   "kanji": "被",
+   "han_viet": "BỊ",
+   "meaning": "bị, bị động, bị cáo"
   },
   {
    "stt": 52,
-   "kanji": "技"
+   "kanji": "技",
+   "han_viet": "KĨ",
+   "meaning": "kĩ thuật, kĩ nghệ"
   },
   {
    "stt": 53,
-   "kanji": "低"
+   "kanji": "低",
+   "han_viet": "ĐÊ",
+   "meaning": "thấp, đê hèn, đê tiện"
   },
   {
    "stt": 54,
-   "kanji": "復"
+   "kanji": "復",
+   "han_viet": "PHỤC",
+   "meaning": "phục thù, hồi phục"
   },
   {
    "stt": 55,
-   "kanji": "移"
+   "kanji": "移",
+   "han_viet": "DI",
+   "meaning": "di chuyển, di động"
   },
   {
    "stt": 56,
-   "kanji": "個"
+   "kanji": "個",
+   "han_viet": "CÁ",
+   "meaning": "cá nhân, cá thể"
   },
   {
    "stt": 57,
-   "kanji": "門"
+   "kanji": "門",
+   "han_viet": "MÔN",
+   "meaning": "cửa, nhập môn, môn đồ, bộ môn"
   },
   {
    "stt": 58,
-   "kanji": "課"
+   "kanji": "課",
+   "han_viet": "KHÓA",
+   "meaning": "khóa học, chính khóa"
   },
   {
    "stt": 59,
-   "kanji": "脳"
+   "kanji": "脳",
+   "han_viet": "NÃO",
+   "meaning": "bộ não, đầu não"
   },
   {
    "stt": 60,
-   "kanji": "極"
+   "kanji": "極",
+   "han_viet": "CỰC",
+   "meaning": "cực lực, cùng cực, địa cực"
   },
   {
    "stt": 61,
-   "kanji": "含"
+   "kanji": "含",
+   "han_viet": "HÀM",
+   "meaning": "hàm ý, hàm nghĩa, hàm súc"
   },
   {
    "stt": 62,
-   "kanji": "蔵"
+   "kanji": "蔵",
+   "han_viet": "TÀNG",
+   "meaning": "bảo tàng, tàng trữ, tàng hình"
   },
   {
    "stt": 63,
-   "kanji": "量"
+   "kanji": "量",
+   "han_viet": "LƯỢNG",
+   "meaning": "lực lượng, độ lượng, dung lượng, trọng lượng"
   },
   {
    "stt": 64,
-   "kanji": "型"
+   "kanji": "型",
+   "han_viet": "HÌNH",
+   "meaning": "khuôn hình, mô hình"
   },
   {
    "stt": 65,
-   "kanji": "況"
+   "kanji": "況",
+   "han_viet": "HUỐNG",
+   "meaning": "tình huống, trạng huống"
   },
   {
    "stt": 66,
-   "kanji": "針"
+   "kanji": "針",
+   "han_viet": "CHÂM",
+   "meaning": "cái kim, phương châm, châm cứu"
   },
   {
    "stt": 67,
-   "kanji": "専"
+   "kanji": "専",
+   "han_viet": "CHUYÊN",
+   "meaning": "chuyên môn, chuyên quyền"
   },
   {
    "stt": 68,
-   "kanji": "谷"
+   "kanji": "谷",
+   "han_viet": "CỐC",
+   "meaning": "thung lũng, khê cốc"
   },
   {
    "stt": 69,
-   "kanji": "史"
+   "kanji": "史",
+   "han_viet": "SỬ",
+   "meaning": "lịch sử, sử sách"
   },
   {
    "stt": 70,
-   "kanji": "階"
+   "kanji": "階",
+   "han_viet": "GIAI",
+   "meaning": "giai cấp, giai tầng"
   },
   {
    "stt": 71,
-   "kanji": "管"
+   "kanji": "管",
+   "han_viet": "QUẢN",
+   "meaning": "ống, mao quản, quản lí"
   },
   {
    "stt": 72,
-   "kanji": "兵"
+   "kanji": "兵",
+   "han_viet": "BINH",
+   "meaning": "binh lính, binh lực"
   },
   {
    "stt": 73,
-   "kanji": "接"
+   "kanji": "接",
+   "han_viet": "TIẾP",
+   "meaning": "nối tiếp, tiếp đãi, tiếp xúc"
   },
   {
    "stt": 74,
-   "kanji": "細"
+   "kanji": "細",
+   "han_viet": "TẾ",
+   "meaning": "tinh tế, tường tế, tế bào"
   },
   {
    "stt": 75,
-   "kanji": "効"
+   "kanji": "効",
+   "han_viet": "HIỆU",
+   "meaning": "hiệu quả, hiệu ứng, công hiệu"
   },
   {
    "stt": 76,
-   "kanji": "丸"
+   "kanji": "丸",
+   "han_viet": "HOÀN",
+   "meaning": "tròn"
   },
   {
    "stt": 77,
-   "kanji": "湾"
+   "kanji": "湾",
+   "han_viet": "LOAN",
+   "meaning": "vịnh"
   },
   {
    "stt": 78,
-   "kanji": "録"
+   "kanji": "録",
+   "han_viet": "LỤC",
+   "meaning": "kí lục, đăng lục"
   },
   {
    "stt": 79,
-   "kanji": "省"
+   "kanji": "省",
+   "han_viet": "TỈNH",
+   "meaning": "tỉnh lược, phản tỉnh, hồi tỉnh"
   },
   {
    "stt": 80,
-   "kanji": "旧"
+   "kanji": "旧",
+   "han_viet": "CỰU",
+   "meaning": "cũ, cựu thủ tướng, cựu binh"
   },
   {
    "stt": 81,
-   "kanji": "橋"
+   "kanji": "橋",
+   "han_viet": "KIỀU",
+   "meaning": "cây cầu"
   },
   {
    "stt": 82,
-   "kanji": "岸"
+   "kanji": "岸",
+   "han_viet": "NGẠN",
+   "meaning": "hải ngạn"
   },
   {
    "stt": 83,
-   "kanji": "周"
+   "kanji": "周",
+   "han_viet": "CHU",
+   "meaning": "chu vi, chu biên"
   },
   {
    "stt": 84,
-   "kanji": "材"
+   "kanji": "材",
+   "han_viet": "TÀI",
+   "meaning": "tài liệu"
   },
   {
    "stt": 85,
-   "kanji": "戸"
+   "kanji": "戸",
+   "han_viet": "HỘ",
+   "meaning": "hộ khẩu"
   },
   {
    "stt": 86,
-   "kanji": "央"
+   "kanji": "央",
+   "han_viet": "ƯƠNG",
+   "meaning": "trung ương"
   },
   {
    "stt": 87,
-   "kanji": "券"
+   "kanji": "券",
+   "han_viet": "KHOÁN",
+   "meaning": "vé, chứng khoán"
   },
   {
    "stt": 88,
-   "kanji": "編"
+   "kanji": "編",
+   "han_viet": "BIÊN",
+   "meaning": "đan, biên tập"
   },
   {
    "stt": 89,
-   "kanji": "捜"
+   "kanji": "捜",
+   "han_viet": "SƯU",
+   "meaning": "sưu tầm, sưu tập"
   },
   {
    "stt": 90,
-   "kanji": "竹"
+   "kanji": "竹",
+   "han_viet": "TRÚC",
+   "meaning": "trúc"
   },
   {
    "stt": 91,
-   "kanji": "超"
+   "kanji": "超",
+   "han_viet": "SIÊU",
+   "meaning": "siêu việt, siêu thị, siêu nhân"
   },
   {
    "stt": 92,
-   "kanji": "並"
+   "kanji": "並",
+   "han_viet": "TỊNH",
+   "meaning": "xếp hàng"
   },
   {
    "stt": 93,
-   "kanji": "療"
+   "kanji": "療",
+   "han_viet": "LIỆU",
+   "meaning": "trị liệu"
   },
   {
    "stt": 94,
-   "kanji": "採"
+   "kanji": "採",
+   "han_viet": "THẢI",
+   "meaning": "hái, thải dụng"
   },
   {
    "stt": 95,
-   "kanji": "森"
+   "kanji": "森",
+   "han_viet": "SÂM",
+   "meaning": "rừng"
   },
   {
    "stt": 96,
-   "kanji": "競"
+   "kanji": "競",
+   "han_viet": "CẠNH",
+   "meaning": "cạnh tranh"
   },
   {
    "stt": 97,
-   "kanji": "介"
+   "kanji": "介",
+   "han_viet": "GIỚI",
+   "meaning": "ở giữa, môi giới, giới thiệu"
   },
   {
    "stt": 98,
-   "kanji": "根"
+   "kanji": "根",
+   "han_viet": "CĂN",
+   "meaning": "gốc, căn bản, căn cứ"
   },
   {
    "stt": 99,
-   "kanji": "販"
+   "kanji": "販",
+   "han_viet": "PHÁN",
+   "meaning": "bán, phán mại"
   },
   {
    "stt": 100,
-   "kanji": "歴"
+   "kanji": "歴",
+   "han_viet": "LỊCH",
+   "meaning": "lí lịch, lịch sử, kinh lịch"
   },
   {
    "stt": 101,
-   "kanji": "将"
+   "kanji": "将",
+   "han_viet": "TƯỚNG",
+   "meaning": "tướng quân"
   },
   {
    "stt": 102,
-   "kanji": "幅"
+   "kanji": "幅",
+   "han_viet": "PHÚC",
+   "meaning": "bề ngang"
   },
   {
    "stt": 103,
-   "kanji": "般"
+   "kanji": "般",
+   "han_viet": "BÀN, BAN",
+   "meaning": "nhất ban"
   },
   {
    "stt": 104,
-   "kanji": "貿"
+   "kanji": "貿",
+   "han_viet": "MẬU",
+   "meaning": "mậu dịch, trao đổi"
   },
   {
    "stt": 105,
-   "kanji": "講"
+   "kanji": "講",
+   "han_viet": "GIẢNG",
+   "meaning": "giảng đường, giảng bài"
   },
   {
    "stt": 106,
-   "kanji": "林"
+   "kanji": "林",
+   "han_viet": "LÂM",
+   "meaning": "lâm sản, lâm nghiệp"
   },
   {
    "stt": 107,
-   "kanji": "装"
+   "kanji": "装",
+   "han_viet": "TRANG",
+   "meaning": "trang phục, hóa trang, trang bị"
   },
   {
    "stt": 108,
-   "kanji": "諸"
+   "kanji": "諸",
+   "han_viet": "CHƯ",
+   "meaning": "chư hầu"
   },
   {
    "stt": 109,
-   "kanji": "劇"
+   "kanji": "劇",
+   "han_viet": "KỊCH",
+   "meaning": "kịch bản, vở kịch, kịch tính"
   },
   {
    "stt": 110,
-   "kanji": "河"
+   "kanji": "河",
+   "han_viet": "HÀ",
+   "meaning": "sông, sơn hà"
   },
   {
    "stt": 111,
-   "kanji": "航"
+   "kanji": "航",
+   "han_viet": "HÀNG",
+   "meaning": "hàng không, hàng hải"
   },
   {
    "stt": 112,
-   "kanji": "鉄"
+   "kanji": "鉄",
+   "han_viet": "THIẾT",
+   "meaning": "sắt, thiết đạo, thiết giáp"
   },
   {
    "stt": 113,
-   "kanji": "児"
+   "kanji": "児",
+   "han_viet": "NHI",
+   "meaning": "nhi đồng, hài nhi"
   },
   {
    "stt": 114,
-   "kanji": "禁"
+   "kanji": "禁",
+   "han_viet": "CẤM",
+   "meaning": "cấm đoán, nghiêm cấm"
   },
   {
    "stt": 115,
-   "kanji": "印"
+   "kanji": "印",
+   "han_viet": "ẤN",
+   "meaning": "in ấn, ấn tượng"
   },
   {
    "stt": 116,
-   "kanji": "逆"
+   "kanji": "逆",
+   "han_viet": "NGHỊCH",
+   "meaning": "phản nghịch"
   },
   {
    "stt": 117,
-   "kanji": "換"
+   "kanji": "換",
+   "han_viet": "HOÁN",
+   "meaning": "giao hoán"
   },
   {
    "stt": 118,
-   "kanji": "久"
+   "kanji": "久",
+   "han_viet": "CỬU",
+   "meaning": "lâu, vĩnh cửu"
   },
   {
    "stt": 119,
-   "kanji": "短"
+   "kanji": "短",
+   "han_viet": "ĐOẢN",
+   "meaning": "đoản mệnh, sở đoản"
   },
   {
    "stt": 120,
-   "kanji": "油"
+   "kanji": "油",
+   "han_viet": "DU",
+   "meaning": "dầu"
   },
   {
    "stt": 121,
-   "kanji": "暴"
+   "kanji": "暴",
+   "han_viet": "BẠO, BỘC",
+   "meaning": "bạo lực, bộc lộ"
   },
   {
    "stt": 122,
-   "kanji": "輪"
+   "kanji": "輪",
+   "han_viet": "LUÂN",
+   "meaning": "bánh xe, luân hồi"
   },
   {
    "stt": 123,
-   "kanji": "占"
+   "kanji": "占",
+   "han_viet": "CHIÊM, CHIẾM",
+   "meaning": "chiếm cứ"
   },
   {
    "stt": 124,
-   "kanji": "植"
+   "kanji": "植",
+   "han_viet": "THỰC",
+   "meaning": "thực vật, thực dân"
   },
   {
    "stt": 125,
-   "kanji": "清"
+   "kanji": "清",
+   "han_viet": "THANH",
+   "meaning": "thanh bạch, trong sạch"
   },
   {
    "stt": 126,
-   "kanji": "倍"
+   "kanji": "倍",
+   "han_viet": "BỘI",
+   "meaning": "bội thu, bội số"
   },
   {
    "stt": 127,
-   "kanji": "均"
+   "kanji": "均",
+   "han_viet": "QUÂN",
+   "meaning": "quân bình, quân nhất"
   },
   {
    "stt": 128,
-   "kanji": "億"
+   "kanji": "億",
+   "han_viet": "ỨC",
+   "meaning": "trăm triệu"
   },
   {
    "stt": 129,
-   "kanji": "圧"
+   "kanji": "圧",
+   "han_viet": "ÁP",
+   "meaning": "áp lực, trấn áp"
   },
   {
    "stt": 130,
-   "kanji": "芸"
+   "kanji": "芸",
+   "han_viet": "NGHỆ",
+   "meaning": "nghệ thuật, nghệ nhân"
   },
   {
    "stt": 131,
-   "kanji": "署"
+   "kanji": "署",
+   "han_viet": "THỰ",
+   "meaning": "biệt thự"
   },
   {
    "stt": 132,
-   "kanji": "伸"
+   "kanji": "伸",
+   "han_viet": "THÂN",
+   "meaning": "dãn ra"
   },
   {
    "stt": 133,
-   "kanji": "停"
+   "kanji": "停",
+   "han_viet": "ĐÌNH",
+   "meaning": "đình chỉ"
   },
   {
    "stt": 134,
-   "kanji": "爆"
+   "kanji": "爆",
+   "han_viet": "BỘC",
+   "meaning": "bộc phát"
   },
   {
    "stt": 135,
-   "kanji": "陸"
+   "kanji": "陸",
+   "han_viet": "LỤC",
+   "meaning": "lục địa, lục quân"
   },
   {
    "stt": 136,
-   "kanji": "玉"
+   "kanji": "玉",
+   "han_viet": "NGỌC",
+   "meaning": "ngọc"
   },
   {
    "stt": 137,
-   "kanji": "波"
+   "kanji": "波",
+   "han_viet": "BA",
+   "meaning": "sóng, phong ba"
   },
   {
    "stt": 138,
-   "kanji": "帯"
+   "kanji": "帯",
+   "han_viet": "ĐỚI",
+   "meaning": "nhiệt đới, ôn đới"
   },
   {
    "stt": 139,
-   "kanji": "延"
+   "kanji": "延",
+   "han_viet": "DUYÊN",
+   "meaning": "trì hoãn"
   },
   {
    "stt": 140,
-   "kanji": "羽"
+   "kanji": "羽",
+   "han_viet": "VŨ",
+   "meaning": "lông vũ"
   },
   {
    "stt": 141,
-   "kanji": "固"
+   "kanji": "固",
+   "han_viet": "CỐ",
+   "meaning": "ngoan cố, cố thủ"
   },
   {
    "stt": 142,
-   "kanji": "則"
+   "kanji": "則",
+   "han_viet": "TẮC",
+   "meaning": "quy tắc, phép tắc"
   },
   {
    "stt": 143,
-   "kanji": "乱"
+   "kanji": "乱",
+   "han_viet": "LOẠN",
+   "meaning": "phản loạn, chiến loạn"
   },
   {
    "stt": 144,
-   "kanji": "普"
+   "kanji": "普",
+   "han_viet": "PHỔ",
+   "meaning": "phổ thông"
   },
   {
    "stt": 145,
-   "kanji": "測"
+   "kanji": "測",
+   "han_viet": "TRẮC",
+   "meaning": "đo đạc"
   },
   {
    "stt": 146,
-   "kanji": "豊"
+   "kanji": "豊",
+   "han_viet": "PHONG",
+   "meaning": "phong phú"
   },
   {
    "stt": 147,
-   "kanji": "厚"
+   "kanji": "厚",
+   "han_viet": "HẬU",
+   "meaning": "nồng hậu, hậu tạ"
   },
   {
    "stt": 148,
-   "kanji": "齢"
+   "kanji": "齢",
+   "han_viet": "LINH",
+   "meaning": "tuổi"
   },
   {
    "stt": 149,
-   "kanji": "囲"
+   "kanji": "囲",
+   "han_viet": "VI",
+   "meaning": "chu vi, bao vây"
   },
   {
    "stt": 150,
-   "kanji": "卒"
+   "kanji": "卒",
+   "han_viet": "TỐT",
+   "meaning": "tốt nghiệp"
   },
   {
    "stt": 151,
-   "kanji": "略"
+   "kanji": "略",
+   "han_viet": "LƯỢC",
+   "meaning": "tỉnh lược, xâm lược"
   },
   {
    "stt": 152,
-   "kanji": "承"
+   "kanji": "承",
+   "han_viet": "THỪA",
+   "meaning": "thừa nhận"
   },
   {
    "stt": 153,
-   "kanji": "順"
+   "kanji": "順",
+   "han_viet": "THUẬN",
+   "meaning": "tòng thuận, thuận tự"
   },
   {
    "stt": 154,
-   "kanji": "岩"
+   "kanji": "岩",
+   "han_viet": "NHAM",
+   "meaning": "đá tảng, nham thạch"
   },
   {
    "stt": 155,
-   "kanji": "練"
+   "kanji": "練",
+   "han_viet": "LUYỆN",
+   "meaning": "rèn luyện, luyện tập"
   },
   {
    "stt": 156,
-   "kanji": "軽"
+   "kanji": "軽",
+   "han_viet": "KHINH",
+   "meaning": "khinh suất, khinh khi"
   },
   {
    "stt": 157,
-   "kanji": "了"
+   "kanji": "了",
+   "han_viet": "LIỄU",
+   "meaning": "kết liễu, liễu giải"
   },
   {
    "stt": 158,
-   "kanji": "庁"
+   "kanji": "庁",
+   "han_viet": "SẢNH",
+   "meaning": "đại sảnh"
   },
   {
    "stt": 159,
-   "kanji": "城"
+   "kanji": "城",
+   "han_viet": "THÀNH",
+   "meaning": "thành phố, thành quách"
   },
   {
    "stt": 160,
-   "kanji": "患"
+   "kanji": "患",
+   "han_viet": "HOẠN",
+   "meaning": "bệnh hoạn"
   },
   {
    "stt": 161,
-   "kanji": "層"
+   "kanji": "層",
+   "han_viet": "TẦNG",
+   "meaning": "hạ tầng, thượng tầng"
   },
   {
    "stt": 162,
-   "kanji": "版"
+   "kanji": "版",
+   "han_viet": "BẢN",
+   "meaning": "xuất bản"
   },
   {
    "stt": 163,
-   "kanji": "令"
+   "kanji": "令",
+   "han_viet": "LỆNH",
+   "meaning": "mệnh lệnh, pháp lệnh"
   },
   {
    "stt": 164,
-   "kanji": "角"
+   "kanji": "角",
+   "han_viet": "GIÁC",
+   "meaning": "tam giác, tứ giác"
   },
   {
    "stt": 165,
-   "kanji": "絡"
+   "kanji": "絡",
+   "han_viet": "LẠC",
+   "meaning": "liên lạc"
   },
   {
    "stt": 166,
-   "kanji": "損"
+   "kanji": "損",
+   "han_viet": "TỔN",
+   "meaning": "tổn hại, tổn thương"
   },
   {
    "stt": 167,
-   "kanji": "募"
+   "kanji": "募",
+   "han_viet": "MỘ",
+   "meaning": "mộ tập, chiêu mộ"
   },
   {
    "stt": 168,
-   "kanji": "裏"
+   "kanji": "裏",
+   "han_viet": "LÍ",
+   "meaning": "đằng sau"
   },
   {
    "stt": 169,
-   "kanji": "仏"
+   "kanji": "仏",
+   "han_viet": "PHẬT",
+   "meaning": "phật giáo"
   },
   {
    "stt": 170,
-   "kanji": "績"
+   "kanji": "績",
+   "han_viet": "TÍCH",
+   "meaning": "thành tích"
   },
   {
    "stt": 171,
-   "kanji": "築"
+   "kanji": "築",
+   "han_viet": "TRÚC",
+   "meaning": "kiến trúc"
   },
   {
    "stt": 172,
-   "kanji": "貨"
+   "kanji": "貨",
+   "han_viet": "HÓA",
+   "meaning": "hàng hóa"
   },
   {
    "stt": 173,
-   "kanji": "混"
+   "kanji": "混",
+   "han_viet": "HỖN",
+   "meaning": "hỗn hợp, hỗn độn, hỗn loạn"
   },
   {
    "stt": 174,
-   "kanji": "昇"
+   "kanji": "昇",
+   "han_viet": "THĂNG",
+   "meaning": "thăng tiến, thăng thiên"
   },
   {
    "stt": 175,
-   "kanji": "池"
+   "kanji": "池",
+   "han_viet": "TRÌ",
+   "meaning": "cái ao"
   },
   {
    "stt": 176,
-   "kanji": "血"
+   "kanji": "血",
+   "han_viet": "HUYẾT",
+   "meaning": "tâm huyết"
   },
   {
    "stt": 177,
-   "kanji": "温"
+   "kanji": "温",
+   "han_viet": "ÔN",
+   "meaning": "ôn hòa, ôn tồn"
   },
   {
    "stt": 178,
-   "kanji": "季"
+   "kanji": "季",
+   "han_viet": "QUÝ",
+   "meaning": "mùa"
   },
   {
    "stt": 179,
-   "kanji": "星"
+   "kanji": "星",
+   "han_viet": "TINH",
+   "meaning": "hành tinh, tinh tú"
   },
   {
    "stt": 180,
-   "kanji": "永"
+   "kanji": "永",
+   "han_viet": "VĨNH",
+   "meaning": "vĩnh viễn, vỉnh cửu"
   },
   {
    "stt": 181,
-   "kanji": "著"
+   "kanji": "著",
+   "han_viet": "TRỨ",
+   "meaning": "trứ danh, trứ tác"
   },
   {
    "stt": 182,
-   "kanji": "誌"
+   "kanji": "誌",
+   "han_viet": "CHÍ",
+   "meaning": "tạp chí"
   },
   {
    "stt": 183,
-   "kanji": "庫"
+   "kanji": "庫",
+   "han_viet": "KHỐ",
+   "meaning": "kho, xa khố, kim khố"
   },
   {
    "stt": 184,
-   "kanji": "刊"
+   "kanji": "刊",
+   "han_viet": "SAN",
+   "meaning": "tuần san, chuyên san"
   },
   {
    "stt": 185,
-   "kanji": "像"
+   "kanji": "像",
+   "han_viet": "TƯỢNG",
+   "meaning": "tưởng tượng, thần tượng"
   },
   {
    "stt": 186,
-   "kanji": "香"
+   "kanji": "香",
+   "han_viet": "HƯƠNG",
+   "meaning": "mùi hương, hương thơm"
   },
   {
    "stt": 187,
-   "kanji": "坂"
+   "kanji": "坂",
+   "han_viet": "PHẢN",
+   "meaning": "cái dốc"
   },
   {
    "stt": 188,
-   "kanji": "底"
+   "kanji": "底",
+   "han_viet": "ĐỂ",
+   "meaning": "đáy"
   },
   {
    "stt": 189,
-   "kanji": "布"
+   "kanji": "布",
+   "han_viet": "BỐ",
+   "meaning": "vải, tuyên bố"
   },
   {
    "stt": 190,
-   "kanji": "寺"
+   "kanji": "寺",
+   "han_viet": "TỰ",
+   "meaning": "chùa"
   },
   {
    "stt": 191,
-   "kanji": "宇"
+   "kanji": "宇",
+   "han_viet": "VŨ",
+   "meaning": "vũ trụ"
   },
   {
    "stt": 192,
-   "kanji": "巨"
+   "kanji": "巨",
+   "han_viet": "CỰ",
+   "meaning": "to lớn, cự đại, cự phách"
   },
   {
    "stt": 193,
-   "kanji": "震"
+   "kanji": "震",
+   "han_viet": "CHẤN",
+   "meaning": "địa chấn"
   },
   {
    "stt": 194,
-   "kanji": "希"
+   "kanji": "希",
+   "han_viet": "HI",
+   "meaning": "hi hữu, hi vọng"
   },
   {
    "stt": 195,
-   "kanji": "触"
+   "kanji": "触",
+   "han_viet": "XÚC",
+   "meaning": "tiếp xúc"
   },
   {
    "stt": 196,
-   "kanji": "依"
+   "kanji": "依",
+   "han_viet": "Ỷ",
+   "meaning": "ỷ lại"
   },
   {
    "stt": 197,
-   "kanji": "籍"
+   "kanji": "籍",
+   "han_viet": "TỊCH",
+   "meaning": "quốc tịch, hộ tịch"
   },
   {
    "stt": 198,
-   "kanji": "汚"
+   "kanji": "汚",
+   "han_viet": "Ô",
+   "meaning": "ô nhiễm"
   },
   {
    "stt": 199,
-   "kanji": "枚"
+   "kanji": "枚",
+   "han_viet": "MAI",
+   "meaning": "tờ"
   },
   {
    "stt": 200,
-   "kanji": "複"
+   "kanji": "複",
+   "han_viet": "PHỨC",
+   "meaning": "phức tạp"
   },
   {
    "stt": 201,
-   "kanji": "郵"
+   "kanji": "郵",
+   "han_viet": "BƯU",
+   "meaning": "bưu điện"
   },
   {
    "stt": 202,
-   "kanji": "仲"
+   "kanji": "仲",
+   "han_viet": "TRỌNG",
+   "meaning": "trọng tài"
   },
   {
    "stt": 203,
-   "kanji": "栄"
+   "kanji": "栄",
+   "han_viet": "VINH",
+   "meaning": "vinh quang, vinh hạnh"
   },
   {
    "stt": 204,
-   "kanji": "札"
+   "kanji": "札",
+   "han_viet": "TRÁT",
+   "meaning": "tiền giấy"
   },
   {
    "stt": 205,
-   "kanji": "板"
+   "kanji": "板",
+   "han_viet": "BẢN",
+   "meaning": "tấm bảng"
   },
   {
    "stt": 206,
-   "kanji": "骨"
+   "kanji": "骨",
+   "han_viet": "CỐT",
+   "meaning": "xương, cốt nhục"
   },
   {
    "stt": 207,
-   "kanji": "傾"
+   "kanji": "傾",
+   "han_viet": "KHUYNH",
+   "meaning": "khuynh đảo, khuynh hướng"
   },
   {
    "stt": 208,
-   "kanji": "届"
+   "kanji": "届",
+   "han_viet": "GIỚI",
+   "meaning": "đưa đến"
   },
   {
    "stt": 209,
-   "kanji": "巻"
+   "kanji": "巻",
+   "han_viet": "QUYỂN",
+   "meaning": "quyển sách"
   },
   {
    "stt": 210,
-   "kanji": "燃"
+   "kanji": "燃",
+   "han_viet": "NHIÊN",
+   "meaning": "nhiên liệu"
   },
   {
    "stt": 211,
-   "kanji": "跡"
+   "kanji": "跡",
+   "han_viet": "TÍCH",
+   "meaning": "dấu tích, vết tích"
   },
   {
    "stt": 212,
-   "kanji": "包"
+   "kanji": "包",
+   "han_viet": "BAO",
+   "meaning": "bao bọc"
   },
   {
    "stt": 213,
-   "kanji": "駐"
+   "kanji": "駐",
+   "han_viet": "TRÚ",
+   "meaning": "đồn trú"
   },
   {
    "stt": 214,
-   "kanji": "弱"
+   "kanji": "弱",
+   "han_viet": "NHƯỢC",
+   "meaning": "nhược điểm, nhược tiểu"
   },
   {
    "stt": 215,
-   "kanji": "紹"
+   "kanji": "紹",
+   "han_viet": "THIỆU",
+   "meaning": "giới thiệu"
   },
   {
    "stt": 216,
-   "kanji": "雇"
+   "kanji": "雇",
+   "han_viet": "CỐ",
+   "meaning": "thuê, cố nông"
   },
   {
    "stt": 217,
-   "kanji": "替"
+   "kanji": "替",
+   "han_viet": "THẾ",
+   "meaning": "thay thế, đại thế"
   },
   {
    "stt": 218,
-   "kanji": "預"
+   "kanji": "預",
+   "han_viet": "DỰ",
+   "meaning": "gửi"
   },
   {
    "stt": 219,
-   "kanji": "焼"
+   "kanji": "焼",
+   "han_viet": "THIÊU",
+   "meaning": "thiêu đốt"
   },
   {
    "stt": 220,
-   "kanji": "簡"
+   "kanji": "簡",
+   "han_viet": "GIẢN",
+   "meaning": "đơn giản"
   },
   {
    "stt": 221,
-   "kanji": "章"
+   "kanji": "章",
+   "han_viet": "CHƯƠNG",
+   "meaning": "chương sách"
   },
   {
    "stt": 222,
-   "kanji": "臓"
+   "kanji": "臓",
+   "han_viet": "TẠNG",
+   "meaning": "nội tạng"
   },
   {
    "stt": 223,
-   "kanji": "律"
+   "kanji": "律",
+   "han_viet": "LUẬT",
+   "meaning": "luật pháp"
   },
   {
    "stt": 224,
-   "kanji": "贈"
+   "kanji": "贈",
+   "han_viet": "TẶNG",
+   "meaning": "hiến tặng"
   },
   {
    "stt": 225,
-   "kanji": "照"
+   "kanji": "照",
+   "han_viet": "CHIẾU",
+   "meaning": "tham chiếu"
   },
   {
    "stt": 226,
-   "kanji": "薄"
+   "kanji": "薄",
+   "han_viet": "BẠC",
+   "meaning": "mỏng, bạc mệnh"
   },
   {
    "stt": 227,
-   "kanji": "群"
+   "kanji": "群",
+   "han_viet": "QUẦN",
+   "meaning": "quần chúng, quần thể"
   },
   {
    "stt": 228,
-   "kanji": "秒"
+   "kanji": "秒",
+   "han_viet": "MIỂU",
+   "meaning": "giây (1/60 phút)"
   },
   {
    "stt": 229,
-   "kanji": "奥"
+   "kanji": "奥",
+   "han_viet": "ÁO",
+   "meaning": "trong cùng"
   },
   {
    "stt": 230,
-   "kanji": "詰"
+   "kanji": "詰",
+   "han_viet": "CẬT",
+   "meaning": "đóng hộp"
   },
   {
    "stt": 231,
-   "kanji": "双"
+   "kanji": "双",
+   "han_viet": "SONG",
+   "meaning": "song sinh"
   },
   {
    "stt": 232,
-   "kanji": "刺"
+   "kanji": "刺",
+   "han_viet": "THÍCH, THỨ",
+   "meaning": "thích khách"
   },
   {
    "stt": 233,
-   "kanji": "純"
+   "kanji": "純",
+   "han_viet": "THUẦN",
+   "meaning": "đơn thuần, thuần khiết"
   },
   {
    "stt": 234,
-   "kanji": "翌"
+   "kanji": "翌",
+   "han_viet": "DỰC",
+   "meaning": "<tiếp sau>"
   },
   {
    "stt": 235,
-   "kanji": "快"
+   "kanji": "快",
+   "han_viet": "KHOÁI",
+   "meaning": "khoái lạc"
   },
   {
    "stt": 236,
-   "kanji": "片"
+   "kanji": "片",
+   "han_viet": "PHIẾN",
+   "meaning": "tấm"
   },
   {
    "stt": 237,
-   "kanji": "敬"
+   "kanji": "敬",
+   "han_viet": "KÍNH",
+   "meaning": "kính yêu"
   },
   {
    "stt": 238,
-   "kanji": "悩"
+   "kanji": "悩",
+   "han_viet": "NÃO",
+   "meaning": "khổ não"
   },
   {
    "stt": 239,
-   "kanji": "泉"
+   "kanji": "泉",
+   "han_viet": "TUYỀN",
+   "meaning": "suối"
   },
   {
    "stt": 240,
-   "kanji": "皮"
+   "kanji": "皮",
+   "han_viet": "BÌ",
+   "meaning": "da"
   },
   {
    "stt": 241,
-   "kanji": "漁"
+   "kanji": "漁",
+   "han_viet": "NGƯ",
+   "meaning": "đánh cá"
   },
   {
    "stt": 242,
-   "kanji": "荒"
+   "kanji": "荒",
+   "han_viet": "HOANG",
+   "meaning": "hoang dã, hoang dại"
   },
   {
    "stt": 243,
-   "kanji": "貯"
+   "kanji": "貯",
+   "han_viet": "TRỮ",
+   "meaning": "tàng trữ, lưu trữ"
   },
   {
    "stt": 244,
-   "kanji": "硬"
+   "kanji": "硬",
+   "han_viet": "NGẠNH",
+   "meaning": "cứng, ngang ngạnh"
   },
   {
    "stt": 245,
-   "kanji": "埋"
+   "kanji": "埋",
+   "han_viet": "MAI",
+   "meaning": "chôn"
   },
   {
    "stt": 246,
-   "kanji": "柱"
+   "kanji": "柱",
+   "han_viet": "TRỤ",
+   "meaning": "trụ cột"
   },
   {
    "stt": 247,
-   "kanji": "祭"
+   "kanji": "祭",
+   "han_viet": "TẾ",
+   "meaning": "lễ hội"
   },
   {
    "stt": 248,
-   "kanji": "袋"
+   "kanji": "袋",
+   "han_viet": "ĐẠI",
+   "meaning": "cái túi"
   },
   {
    "stt": 249,
-   "kanji": "筆"
+   "kanji": "筆",
+   "han_viet": "BÚT",
+   "meaning": "bút"
   },
   {
    "stt": 250,
-   "kanji": "訓"
+   "kanji": "訓",
+   "han_viet": "HUẤN",
+   "meaning": "huấn luyện"
   },
   {
    "stt": 251,
-   "kanji": "浴"
+   "kanji": "浴",
+   "han_viet": "DỤC",
+   "meaning": "tắm"
   },
   {
    "stt": 252,
-   "kanji": "童"
+   "kanji": "童",
+   "han_viet": "ĐỒNG",
+   "meaning": "nhi đồng"
   },
   {
    "stt": 253,
-   "kanji": "宝"
+   "kanji": "宝",
+   "han_viet": "BẢO",
+   "meaning": "bảo vật"
   },
   {
    "stt": 254,
-   "kanji": "封"
+   "kanji": "封",
+   "han_viet": "PHONG",
+   "meaning": "phong kiến"
   },
   {
    "stt": 255,
-   "kanji": "胸"
+   "kanji": "胸",
+   "han_viet": "HUNG",
+   "meaning": "ngực"
   },
   {
    "stt": 256,
-   "kanji": "砂"
+   "kanji": "砂",
+   "han_viet": "SA",
+   "meaning": "cát"
   },
   {
    "stt": 257,
-   "kanji": "塩"
+   "kanji": "塩",
+   "han_viet": "DIÊM",
+   "meaning": "muối"
   },
   {
    "stt": 258,
-   "kanji": "賢"
+   "kanji": "賢",
+   "han_viet": "HIỀN",
+   "meaning": "hiền thần, hiền nhân"
   },
   {
    "stt": 259,
-   "kanji": "腕"
+   "kanji": "腕",
+   "han_viet": "OẢN",
+   "meaning": "cánh tay"
   },
   {
    "stt": 260,
-   "kanji": "兆"
+   "kanji": "兆",
+   "han_viet": "TRIỆU",
+   "meaning": "triệu chứng, triệu triệu (10 mũ 12)"
   },
   {
    "stt": 261,
-   "kanji": "床"
+   "kanji": "床",
+   "han_viet": "SÀNG",
+   "meaning": "giường"
   },
   {
    "stt": 262,
-   "kanji": "毛"
+   "kanji": "毛",
+   "han_viet": "MAO",
+   "meaning": "lông"
   },
   {
    "stt": 263,
-   "kanji": "緑"
+   "kanji": "緑",
+   "han_viet": "LỤC",
+   "meaning": "xanh lục"
   },
   {
    "stt": 264,
-   "kanji": "尊"
+   "kanji": "尊",
+   "han_viet": "TÔN",
+   "meaning": "tôn trọng"
   },
   {
    "stt": 265,
-   "kanji": "祝"
+   "kanji": "祝",
+   "han_viet": "CHÚC",
+   "meaning": "chúc phúc"
   },
   {
    "stt": 266,
-   "kanji": "柔"
+   "kanji": "柔",
+   "han_viet": "NHU",
+   "meaning": "nhu nhuyễn"
   },
   {
    "stt": 267,
-   "kanji": "殿"
+   "kanji": "殿",
+   "han_viet": "ĐIỆN",
+   "meaning": "cung điện"
   },
   {
    "stt": 268,
-   "kanji": "濃"
+   "kanji": "濃",
+   "han_viet": "NỒNG",
+   "meaning": "nồng độ"
   },
   {
    "stt": 269,
-   "kanji": "液"
+   "kanji": "液",
+   "han_viet": "DỊCH",
+   "meaning": "dung dịch"
   },
   {
    "stt": 270,
-   "kanji": "衣"
+   "kanji": "衣",
+   "han_viet": "Y",
+   "meaning": "y phục"
   },
   {
    "stt": 271,
-   "kanji": "肩"
+   "kanji": "肩",
+   "han_viet": "KIÊN",
+   "meaning": "vai"
   },
   {
    "stt": 272,
-   "kanji": "零"
+   "kanji": "零",
+   "han_viet": "LINH",
+   "meaning": "số không"
   },
   {
    "stt": 273,
-   "kanji": "幼"
+   "kanji": "幼",
+   "han_viet": "ẤU",
+   "meaning": "ấu trĩ, thơ ấu"
   },
   {
    "stt": 274,
-   "kanji": "荷"
+   "kanji": "荷",
+   "han_viet": "HÀ",
+   "meaning": "hành lí"
   },
   {
    "stt": 275,
-   "kanji": "泊"
+   "kanji": "泊",
+   "han_viet": "BẠC",
+   "meaning": "ngủ lại"
   },
   {
    "stt": 276,
-   "kanji": "黄"
+   "kanji": "黄",
+   "han_viet": "HOÀNG",
+   "meaning": "hoàng kim"
   },
   {
    "stt": 277,
-   "kanji": "甘"
+   "kanji": "甘",
+   "han_viet": "CAM",
+   "meaning": "ngọt, cam chịu"
   },
   {
    "stt": 278,
-   "kanji": "臣"
+   "kanji": "臣",
+   "han_viet": "THẦN",
+   "meaning": "trung thần"
   },
   {
    "stt": 279,
-   "kanji": "浅"
+   "kanji": "浅",
+   "han_viet": "THIỂN",
+   "meaning": "thiển cận"
   },
   {
    "stt": 280,
-   "kanji": "掃"
+   "kanji": "掃",
+   "han_viet": "TẢO",
+   "meaning": "quét"
   },
   {
    "stt": 281,
-   "kanji": "雲"
+   "kanji": "雲",
+   "han_viet": "VÂN",
+   "meaning": "mây"
   },
   {
    "stt": 282,
-   "kanji": "掘"
+   "kanji": "掘",
+   "han_viet": "QUẬT",
+   "meaning": "khai quật"
   },
   {
    "stt": 283,
-   "kanji": "捨"
+   "kanji": "捨",
+   "han_viet": "XẢ",
+   "meaning": "vứt"
   },
   {
    "stt": 284,
-   "kanji": "軟"
+   "kanji": "軟",
+   "han_viet": "NHUYỄN",
+   "meaning": "mềm, nhu nhuyễn"
   },
   {
    "stt": 285,
-   "kanji": "沈"
+   "kanji": "沈",
+   "han_viet": "TRẦM",
+   "meaning": "trầm mặc"
   },
   {
    "stt": 286,
-   "kanji": "凍"
+   "kanji": "凍",
+   "han_viet": "ĐÔNG",
+   "meaning": "đông lạnh"
   },
   {
    "stt": 287,
-   "kanji": "乳"
+   "kanji": "乳",
+   "han_viet": "NHŨ",
+   "meaning": "nhũ mẫu"
   },
   {
    "stt": 288,
-   "kanji": "恋"
+   "kanji": "恋",
+   "han_viet": "LUYẾN",
+   "meaning": "lưu luyến, luyến ái"
   },
   {
    "stt": 289,
-   "kanji": "紅"
+   "kanji": "紅",
+   "han_viet": "HỒNG",
+   "meaning": "hồng quân"
   },
   {
    "stt": 290,
-   "kanji": "郊"
+   "kanji": "郊",
+   "han_viet": "GIAO",
+   "meaning": "ngoại ô, giao ngoại"
   },
   {
    "stt": 291,
-   "kanji": "腰"
+   "kanji": "腰",
+   "han_viet": "YÊU",
+   "meaning": "eo"
   },
   {
    "stt": 292,
-   "kanji": "炭"
+   "kanji": "炭",
+   "han_viet": "THÁN",
+   "meaning": "than"
   },
   {
    "stt": 293,
-   "kanji": "踊"
+   "kanji": "踊",
+   "han_viet": "DŨNG",
+   "meaning": "nhảy múa"
   },
   {
    "stt": 294,
-   "kanji": "冊"
+   "kanji": "冊",
+   "han_viet": "SÁCH",
+   "meaning": "quyển sách"
   },
   {
    "stt": 295,
-   "kanji": "勇"
+   "kanji": "勇",
+   "han_viet": "DŨNG",
+   "meaning": "dũng cảm"
   },
   {
    "stt": 296,
-   "kanji": "械"
+   "kanji": "械",
+   "han_viet": "GIỚI",
+   "meaning": "cơ giới"
   },
   {
    "stt": 297,
-   "kanji": "菜"
+   "kanji": "菜",
+   "han_viet": "THÁI",
+   "meaning": "rau"
   },
   {
    "stt": 298,
-   "kanji": "珍"
+   "kanji": "珍",
+   "han_viet": "TRÂN",
+   "meaning": "trân trọng, trân quý"
   },
   {
    "stt": 299,
-   "kanji": "卵"
+   "kanji": "卵",
+   "han_viet": "NOÃN",
+   "meaning": "trứng"
   },
   {
    "stt": 300,
-   "kanji": "湖"
+   "kanji": "湖",
+   "han_viet": "HỒ",
+   "meaning": "ao hồ"
   },
   {
    "stt": 301,
-   "kanji": "喫"
+   "kanji": "喫",
+   "han_viet": "KHIẾT",
+   "meaning": "uống, hút"
   },
   {
    "stt": 302,
-   "kanji": "干"
+   "kanji": "干",
+   "han_viet": "CAN",
+   "meaning": "khô"
   },
   {
    "stt": 303,
-   "kanji": "虫"
+   "kanji": "虫",
+   "han_viet": "TRÙNG",
+   "meaning": "côn trùng"
   },
   {
    "stt": 304,
-   "kanji": "刷"
+   "kanji": "刷",
+   "han_viet": "LOÁT",
+   "meaning": "ấn loát"
   },
   {
    "stt": 305,
-   "kanji": "湯"
+   "kanji": "湯",
+   "han_viet": "THANG",
+   "meaning": "nước nóng"
   },
   {
    "stt": 306,
-   "kanji": "溶"
+   "kanji": "溶",
+   "han_viet": "DUNG",
+   "meaning": "dung dịch"
   },
   {
    "stt": 307,
-   "kanji": "鉱"
+   "kanji": "鉱",
+   "han_viet": "KHOÁNG",
+   "meaning": "khai khoáng"
   },
   {
    "stt": 308,
-   "kanji": "涙"
+   "kanji": "涙",
+   "han_viet": "LỆ",
+   "meaning": "nước mắt"
   },
   {
    "stt": 309,
-   "kanji": "匹"
+   "kanji": "匹",
+   "han_viet": "THẤT",
+   "meaning": "<đếm con vật>"
   },
   {
    "stt": 310,
-   "kanji": "孫"
+   "kanji": "孫",
+   "han_viet": "TÔN",
+   "meaning": "con cháu"
   },
   {
    "stt": 311,
-   "kanji": "鋭"
+   "kanji": "鋭",
+   "han_viet": "NHUỆ",
+   "meaning": "tinh nhuệ"
   },
   {
    "stt": 312,
-   "kanji": "枝"
+   "kanji": "枝",
+   "han_viet": "CHI",
+   "meaning": "chi nhánh"
   },
   {
    "stt": 313,
-   "kanji": "塗"
+   "kanji": "塗",
+   "han_viet": "ĐỒ",
+   "meaning": "sơn vẽ"
   },
   {
    "stt": 314,
-   "kanji": "軒"
+   "kanji": "軒",
+   "han_viet": "HIÊN",
+   "meaning": "<đếm nhà>"
   },
   {
    "stt": 315,
-   "kanji": "毒"
+   "kanji": "毒",
+   "han_viet": "ĐỘC",
+   "meaning": "đầu độc"
   },
   {
    "stt": 316,
-   "kanji": "叫"
+   "kanji": "叫",
+   "han_viet": "KHIẾU",
+   "meaning": "kêu"
   },
   {
    "stt": 317,
-   "kanji": "拝"
+   "kanji": "拝",
+   "han_viet": "BÁI",
+   "meaning": "sùng bái"
   },
   {
    "stt": 318,
-   "kanji": "氷"
+   "kanji": "氷",
+   "han_viet": "BĂNG",
+   "meaning": "băng tuyết"
   },
   {
    "stt": 319,
-   "kanji": "乾"
+   "kanji": "乾",
+   "han_viet": "CAN",
+   "meaning": "khô"
   },
   {
    "stt": 320,
-   "kanji": "棒"
+   "kanji": "棒",
+   "han_viet": "BỔNG",
+   "meaning": "cái gậy"
   },
   {
    "stt": 321,
-   "kanji": "祈"
+   "kanji": "祈",
+   "han_viet": "KÌ",
+   "meaning": "cầu nguyện"
   },
   {
    "stt": 322,
-   "kanji": "拾"
+   "kanji": "拾",
+   "han_viet": "THẬP",
+   "meaning": "nhặt"
   },
   {
    "stt": 323,
-   "kanji": "粉"
+   "kanji": "粉",
+   "han_viet": "PHẤN",
+   "meaning": "bột"
   },
   {
    "stt": 324,
-   "kanji": "糸"
+   "kanji": "糸",
+   "han_viet": "MỊCH",
+   "meaning": "sợ chỉ"
   },
   {
    "stt": 325,
-   "kanji": "綿"
+   "kanji": "綿",
+   "han_viet": "MIÊN",
+   "meaning": "lụa"
   },
   {
    "stt": 326,
-   "kanji": "汗"
+   "kanji": "汗",
+   "han_viet": "HÃN",
+   "meaning": "mồ hôi"
   },
   {
    "stt": 327,
-   "kanji": "銅"
+   "kanji": "銅",
+   "han_viet": "ĐỒNG",
+   "meaning": "chất đồng"
   },
   {
    "stt": 328,
-   "kanji": "湿"
+   "kanji": "湿",
+   "han_viet": "THẤP",
+   "meaning": "ẩm thấp"
   },
   {
    "stt": 329,
-   "kanji": "瓶"
+   "kanji": "瓶",
+   "han_viet": "BÌNH",
+   "meaning": "cái bình"
   },
   {
    "stt": 330,
-   "kanji": "咲"
+   "kanji": "咲",
+   "han_viet": "TIẾU",
+   "meaning": "nở hoa"
   },
   {
    "stt": 331,
-   "kanji": "召"
+   "kanji": "召",
+   "han_viet": "TRIỆU",
+   "meaning": "triệu tập"
   },
   {
    "stt": 332,
-   "kanji": "缶"
+   "kanji": "缶",
+   "han_viet": "PHỮU",
+   "meaning": "đồ hộp"
   },
   {
    "stt": 333,
-   "kanji": "隻"
+   "kanji": "隻",
+   "han_viet": "CHIẾC",
+   "meaning": "<đếm thuyền>"
   },
   {
    "stt": 334,
-   "kanji": "脂"
+   "kanji": "脂",
+   "han_viet": "CHI",
+   "meaning": "mỡ"
   },
   {
    "stt": 335,
-   "kanji": "蒸"
+   "kanji": "蒸",
+   "han_viet": "CHƯNG",
+   "meaning": "chưng cất"
   },
   {
    "stt": 336,
-   "kanji": "肌"
+   "kanji": "肌",
+   "han_viet": "CƠ",
+   "meaning": "da"
   },
   {
    "stt": 337,
-   "kanji": "耕"
+   "kanji": "耕",
+   "han_viet": "CANH",
+   "meaning": "canh tác"
   },
   {
    "stt": 338,
-   "kanji": "鈍"
+   "kanji": "鈍",
+   "han_viet": "ĐỘN",
+   "meaning": "ngu độn"
   },
   {
    "stt": 339,
-   "kanji": "泥"
+   "kanji": "泥",
+   "han_viet": "NÊ",
+   "meaning": "bùn"
   },
   {
    "stt": 340,
-   "kanji": "隅"
+   "kanji": "隅",
+   "han_viet": "NGUNG",
+   "meaning": "góc"
   },
   {
    "stt": 341,
-   "kanji": "灯"
+   "kanji": "灯",
+   "han_viet": "ĐĂNG",
+   "meaning": "hải đăng"
   },
   {
    "stt": 342,
-   "kanji": "辛"
+   "kanji": "辛",
+   "han_viet": "TÂN",
+   "meaning": "cay"
   },
   {
    "stt": 343,
-   "kanji": "磨"
+   "kanji": "磨",
+   "han_viet": "MA",
+   "meaning": "mài"
   },
   {
    "stt": 344,
-   "kanji": "麦"
+   "kanji": "麦",
+   "han_viet": "MẠCH",
+   "meaning": "lúa mạch"
   },
   {
    "stt": 345,
-   "kanji": "姓"
+   "kanji": "姓",
+   "han_viet": "TÍNH",
+   "meaning": "họ"
   },
   {
    "stt": 346,
-   "kanji": "筒"
+   "kanji": "筒",
+   "han_viet": "ĐỒNG",
+   "meaning": "cái ống"
   },
   {
    "stt": 347,
-   "kanji": "鼻"
+   "kanji": "鼻",
+   "han_viet": "TỊ",
+   "meaning": "mũi"
   },
   {
    "stt": 348,
-   "kanji": "粒"
+   "kanji": "粒",
+   "han_viet": "LẠP",
+   "meaning": "hạt"
   },
   {
    "stt": 349,
-   "kanji": "詞"
+   "kanji": "詞",
+   "han_viet": "TỪ",
+   "meaning": "ca từ"
   },
   {
    "stt": 350,
-   "kanji": "胃"
+   "kanji": "胃",
+   "han_viet": "VỊ",
+   "meaning": "dạ dày"
   },
   {
    "stt": 351,
-   "kanji": "畳"
+   "kanji": "畳",
+   "han_viet": "ĐIỆP",
+   "meaning": "chiếu"
   },
   {
    "stt": 352,
-   "kanji": "机"
+   "kanji": "机",
+   "han_viet": "KỈ",
+   "meaning": "cái bàn"
   },
   {
    "stt": 353,
-   "kanji": "膚"
+   "kanji": "膚",
+   "han_viet": "PHU",
+   "meaning": "da"
   },
   {
    "stt": 354,
-   "kanji": "濯"
+   "kanji": "濯",
+   "han_viet": "TRẠC",
+   "meaning": "rửa"
   },
   {
    "stt": 355,
-   "kanji": "塔"
+   "kanji": "塔",
+   "han_viet": "THÁP",
+   "meaning": "tòa tháp"
   },
   {
    "stt": 356,
-   "kanji": "沸"
+   "kanji": "沸",
+   "han_viet": "PHÍ",
+   "meaning": "đun sôi"
   },
   {
    "stt": 357,
-   "kanji": "灰"
+   "kanji": "灰",
+   "han_viet": "HÔI",
+   "meaning": "tro"
   },
   {
    "stt": 358,
-   "kanji": "菓"
+   "kanji": "菓",
+   "han_viet": "QUẢ",
+   "meaning": "hoa quả"
   },
   {
    "stt": 359,
-   "kanji": "帽"
+   "kanji": "帽",
+   "han_viet": "MẠO",
+   "meaning": "cái mũ"
   },
   {
    "stt": 360,
-   "kanji": "枯"
+   "kanji": "枯",
+   "han_viet": "KHÔ",
+   "meaning": "khô khát"
   },
   {
    "stt": 361,
-   "kanji": "涼"
+   "kanji": "涼",
+   "han_viet": "LƯƠNG",
+   "meaning": "mát"
   },
   {
    "stt": 362,
-   "kanji": "舟"
+   "kanji": "舟",
+   "han_viet": "CHU",
+   "meaning": "thuyền"
   },
   {
    "stt": 363,
-   "kanji": "貝"
+   "kanji": "貝",
+   "han_viet": "BỐI",
+   "meaning": "vỏ sò"
   },
   {
    "stt": 364,
-   "kanji": "符"
+   "kanji": "符",
+   "han_viet": "PHÙ",
+   "meaning": "phù hiệu"
   },
   {
    "stt": 365,
-   "kanji": "憎"
+   "kanji": "憎",
+   "han_viet": "TĂNG",
+   "meaning": "ghét"
   },
   {
    "stt": 366,
-   "kanji": "皿"
+   "kanji": "皿",
+   "han_viet": "MÃNH",
+   "meaning": "đĩa"
   },
   {
    "stt": 367,
-   "kanji": "肯"
+   "kanji": "肯",
+   "han_viet": "KHẲNG",
+   "meaning": "khẳng định"
   },
   {
    "stt": 368,
-   "kanji": "燥"
+   "kanji": "燥",
+   "han_viet": "TÁO",
+   "meaning": "can táo"
   },
   {
    "stt": 369,
-   "kanji": "畜"
+   "kanji": "畜",
+   "han_viet": "SÚC",
+   "meaning": "súc vật"
   },
   {
    "stt": 370,
-   "kanji": "坊"
+   "kanji": "坊",
+   "han_viet": "",
+   "meaning": ""
   },
   {
    "stt": 371,
-   "kanji": "挟"
+   "kanji": "挟",
+   "han_viet": "HIỆP",
+   "meaning": "kẹp"
   },
   {
    "stt": 372,
-   "kanji": "曇"
+   "kanji": "曇",
+   "han_viet": "ĐÀM",
+   "meaning": "có mây"
   },
   {
    "stt": 373,
-   "kanji": "滴"
+   "kanji": "滴",
+   "han_viet": "ĐÍCH",
+   "meaning": "giọt nước"
   },
   {
    "stt": 374,
-   "kanji": "伺"
+   "kanji": "伺",
+   "han_viet": "TỨ",
+   "meaning": "hỏi thăm"
   }
  ]
 }

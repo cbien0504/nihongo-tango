@@ -16,17 +16,27 @@ describe("kanji decks", () => {
     expect(KANJI_N3_DECK.items[0]).toEqual({ stt: 1, kanji: "丸", han_viet: "HOÀN", meaning: "Tròn" });
   });
 
-  it("gives every kanji a Hán Việt, the N3 one for a kanji of both lists", () => {
+  it("gives every kanji a Hán Việt, and the N2 kanji the Hán Việt and meaning of tudienabc.com", () => {
     for (const deck of DECKS) {
       expect(deck.items.filter((item) => !item.han_viet || item.han_viet.includes("?"))).toEqual([]);
     }
+    // tudienabc.com reads the kanji of both lists like kohi.vn, but gives both readings of 領.
     const n3 = new Map(KANJI_N3_DECK.items.map((item) => [item.kanji, item.han_viet]));
     const shared = KANJI_N2_DECK.items.filter((item) => n3.has(item.kanji));
-    expect(shared.length).toBeGreaterThan(100);
-    shared.forEach((item) => expect(item.han_viet).toBe(n3.get(item.kanji)));
-    expect(n2Kanji("比").han_viet).toBe("TỈ");
-    // Read from the kanji table, with the reading of the Japanese kanji.
-    expect(n2Kanji("県").han_viet).toBe("HUYỆN");
+    expect(shared).toHaveLength(161);
+    expect(shared.filter((item) => item.han_viet !== n3.get(item.kanji)).map((item) => `${item.kanji} ${item.han_viet}`)).toEqual([
+      "領 LĨNH, LÃNH",
+    ]);
+    expect(n2Kanji("比")).toMatchObject({ han_viet: "TỈ", meaning: "so sánh, tỉ lệ, tỉ dụ" });
+    // Found in the N1 lessons of tudienabc.com.
+    expect(n2Kanji("保")).toMatchObject({ han_viet: "BẢO", meaning: "bảo trì, bảo vệ, đảm bảo" });
+    // Corrected by scripts/crawl_kanji.py: tudienabc.com reads the simplified Chinese 机 (機).
+    expect(n2Kanji("机")).toMatchObject({ han_viet: "KỈ", meaning: "cái bàn" });
+    // Missing from tudienabc.com: read from the kanji table, without meaning.
+    expect(n2Kanji("坊")).toMatchObject({ han_viet: "PHƯỜNG", meaning: "" });
+    expect(KANJI_N2_DECK.items.filter((item) => !item.meaning).map((item) => item.kanji)).toEqual(["坊"]);
+    expect(KANJI_N2_DECK.hanVietSource).toBe("");
+    expect(KANJI_N5_DECK.hanVietSource).toContain("KANJIDIC2");
     expect(KANJI_N5_DECK.items.slice(0, 3).map((item) => `${item.kanji} ${item.han_viet}`)).toEqual(["日 NHẬT", "一 NHẤT", "国 QUỐC"]);
     // KANJIDIC2 overridden by scripts/build_han_viet_data.py.
     expect(KANJI_N4_DECK.items.find((item) => item.kanji === "料")!.han_viet).toBe("LIỆU");

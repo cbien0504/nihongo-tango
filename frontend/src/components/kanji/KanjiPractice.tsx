@@ -6,7 +6,6 @@ import { useKanjiQuiz, type KanjiQuizMode } from "../../hooks/useKanjiQuiz";
 import { useKeyboardShortcuts } from "../../hooks/useKeyboardShortcuts";
 import { booleanCodec, enumCodec, usePersistentState } from "../../hooks/usePersistentState";
 import { trackEvent } from "../../utils/gtm";
-import { HAN_VIET_SOURCE } from "../../utils/hanViet";
 import { toPercent } from "../../utils/quizEngine";
 import OptionButton from "../ui/OptionButton";
 import ProgressCard from "../ui/ProgressCard";
@@ -371,7 +370,7 @@ export default function KanjiPractice({ deck, active }: KanjiPracticeProps) {
         <kbd>Enter</kbd> câu tiếp theo
         <br />
         Nguồn Kanji: {deck.source}
-        {deck.id !== "n3" && ` · Âm Hán Việt: theo Kanji N3 của kohi.vn, các chữ khác theo ${HAN_VIET_SOURCE}`}
+        {deck.hanVietSource && ` · Âm Hán Việt: ${deck.hanVietSource}`}
       </p>
 
       {isListOpen && (

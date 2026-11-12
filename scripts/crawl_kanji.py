@@ -7,8 +7,11 @@ Usage (from the repo root):
     their Hán Việt and Vietnamese meaning. The page is rendered by Nuxt: the table is HTML
     escaped inside a script.
   - N5, N4, N2: the lists of JLPTsensei, e.g. https://jlptsensei.com/jlpt-n2-kanji-list/
-    (100 kanji a page). Only the kanji are kept: their meaning is English, and the app reads
-    their Hán Việt in frontend/src/data/kanji_han_viet.json.
+    (100 kanji a page). Their meaning is English, so only the kanji are kept.
+  - N2: the Hán Việt and Vietnamese meaning of its kanji come from the kanji lessons of
+    tudienabc.com (https://www.tudienabc.com/nang-luc-nhat-ngu/kanji/trinh-do-N2/hoc-tieng-nhat-kanji-3,
+    19 lessons), which list 367 of the 374 kanji; 6 others are in its N1 lessons. The app
+    reads the Hán Việt of the kanji left without one in frontend/src/data/kanji_han_viet.json.
 The on and kun readings are left out. Writes frontend/src/data/kanji_<level>.json; run
 scripts/build_han_viet_data.py afterwards so every kanji has a Hán Việt reading.
 """
@@ -38,6 +41,13 @@ KOHI_CORRECTIONS = {"陽": "DƯƠNG", "板": "BẢN", "数": "SỐ", "炭": "TH�
 SENSEI_URL = "https://jlptsensei.com/jlpt-{level}-kanji-list/"
 # Pages of each list of JLPTsensei: 80 kanji in N5, 167 in N4, 374 in N2.
 SENSEI_PAGE_COUNTS = {"N5": 1, "N4": 2, "N2": 4}
+TUDIENABC_URL = "https://www.tudienabc.com/nang-luc-nhat-ngu/kanji/trinh-do-{level}/hoc-tieng-nhat-kanji-3"
+TUDIENABC_HEADER = ["Kanji", "Hán việt", "Onyomi", "Kunyomi", "Tiếng việt", "English"]
+# Readings of tudienabc.com that are a Vietnamese word (THAN) or the reading of the simplified
+# Chinese 机 (機, CƠ): the Japanese 机 is a desk, read KỈ.
+TUDIENABC_CORRECTIONS = {"炭": "THÁN", "机": "KỈ"}
+# Levels of tudienabc.com read for the Hán Việt and meaning of a JLPTsensei list, first one first.
+TUDIENABC_LEVELS = {"N2": ["N2", "N1"]}
 
 BACKSLASH = "\\"
 JS_ESCAPE_RE = re.compile(re.escape(BACKSLASH) + "u([0-9A-Fa-f]{4})")
@@ -117,6 +127,43 @@ def crawl_sensei(level: str) -> list[dict]:
     return kanji
 
 
+def crawl_tudienabc(level: str) -> dict[str, dict]:
+    """Hán Việt and Vietnamese meaning of the kanji of the lessons of a level of tudienabc.com, by kanji."""
+    url = TUDIENABC_URL.format(level=level)
+    lessons = sorted({int(n) for n in re.findall(rf"trinh-do-{level}/hoc-tieng-nhat-kanji-3/bai-(\d+)", fetch(url))})
+    if not lessons:
+        raise SystemExit(f"tudienabc.com: no lessons on {url}")
+    entries: dict[str, dict] = {}
+    for lesson in lessons:
+        time.sleep(PAUSE_SECONDS)
+        page = fetch(f"{url}/bai-{lesson}")
+        rows = [[text_of(cell) for cell in CELL_RE.findall(row)] for row in ROW_RE.findall(page)]
+        if TUDIENABC_HEADER not in rows:
+            raise SystemExit(f"tudienabc.com: no kanji table on {url}/bai-{lesson}")
+        for char, han_viet, _on, _kun, meaning, _english in (row for row in rows if len(row) == 6 and KANJI_RE.match(row[0])):
+            if char in entries:
+                continue
+            if char in TUDIENABC_CORRECTIONS:
+                print(f"tudienabc.com: {char} {han_viet.upper()} → {TUDIENABC_CORRECTIONS[char]}")
+            entries[char] = {"han_viet": TUDIENABC_CORRECTIONS.get(char, han_viet.upper()), "meaning": meaning}
+    print(f"tudienabc.com {level}: {len(entries)} kanji in {len(lessons)} lessons")
+    return entries
+
+
+def add_readings(kanji: list[dict], levels: list[str]) -> None:
+    """Hán Việt and meaning of tudienabc.com for every kanji, from the first of `levels` listing it."""
+    found: dict[str, dict] = {}
+    for level in levels:
+        if all(entry["kanji"] in found for entry in kanji):
+            break
+        found = {**crawl_tudienabc(level), **found}
+    for entry in kanji:
+        entry.update(found.get(entry["kanji"], {"han_viet": "", "meaning": ""}))
+    missing = "".join(entry["kanji"] for entry in kanji if not entry["han_viet"])
+    if missing:
+        print(f"tudienabc.com: no Hán Việt nor meaning for {missing}; the app reads their Hán Việt in kanji_han_viet.json")
+
+
 def write(level: str, title: str, source: str, kanji: list[dict]) -> None:
     output = DATA_DIR / f"kanji_{level.lower()}.json"
     data = {"level": level, "title": title, "source": source, "kanji": kanji}
@@ -130,8 +177,12 @@ def main() -> None:
         if level == "N3":
             write("N3", "Tổng hợp Kanji N3 đầy đủ nhất", f"kohi.vn – {KOHI_URL}", crawl_n3())
         elif level in SENSEI_PAGE_COUNTS:
+            kanji = crawl_sensei(level)
             source = f"JLPTsensei.com – {SENSEI_URL.format(level=level.lower())}"
-            write(level, f"JLPT {level} Kanji List", source, crawl_sensei(level))
+            if level in TUDIENABC_LEVELS:
+                add_readings(kanji, TUDIENABC_LEVELS[level])
+                source += f" · Hán Việt và nghĩa: tudienabc.com – {TUDIENABC_URL.format(level=level)}"
+            write(level, f"JLPT {level} Kanji List", source, kanji)
         else:
             raise SystemExit(__doc__)
 
