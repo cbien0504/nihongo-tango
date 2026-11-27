@@ -14,6 +14,7 @@ const THEMES = ["dark", "light"] as const;
 type Theme = (typeof THEMES)[number];
 
 const themeCodec = enumCodec(THEMES);
+const THEME_COLORS: Record<Theme, string> = { dark: "#0b0f19", light: "#f8fafc" };
 // The learner logged in on this device, "" when nobody is; the session itself is an HttpOnly cookie.
 const usernameCodec: StorageCodec<string> = {
   parse: (raw) => normalizeUsername(raw) ?? undefined,
@@ -68,6 +69,8 @@ export default function App() {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
+    // The bars of the phone take the background of the theme (--bg of index.css).
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", THEME_COLORS[theme]);
   }, [theme]);
 
   const toggleTheme = () => {

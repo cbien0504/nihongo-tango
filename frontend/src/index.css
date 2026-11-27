@@ -185,10 +185,13 @@ kbd {
    Layout
    ========================================================================== */
 
+/* Installed on the home screen of an iPhone, the page goes under the status bar and the home
+   indicator (viewport-fit=cover): the safe-area insets keep the content clear of them. */
 .app {
   max-width: 880px;
   margin: 0 auto;
-  padding: 24px 20px 48px;
+  padding: calc(24px + env(safe-area-inset-top)) calc(20px + env(safe-area-inset-right))
+    calc(48px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left));
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -1387,7 +1390,7 @@ kbd {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: calc(20px + env(safe-area-inset-top)) 20px calc(20px + env(safe-area-inset-bottom));
   background: var(--overlay);
   backdrop-filter: blur(8px);
 }
@@ -1659,7 +1662,7 @@ kbd {
 
 .submit-bar {
   position: sticky;
-  bottom: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom));
   z-index: 10;
   display: flex;
   align-items: center;
@@ -1691,7 +1694,14 @@ kbd {
 
 @media (max-width: 640px) {
   .app {
-    padding: 16px 16px 32px;
+    padding: calc(16px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right))
+      calc(32px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left));
+  }
+
+  /* Safari on iPhone zooms into a field whose text is smaller than 16px when it is touched. */
+  .select,
+  .input {
+    font-size: 16px;
   }
 
   .card,

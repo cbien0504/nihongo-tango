@@ -190,6 +190,16 @@ describe("Mimikara Oboeru N3 – vocabulary practice", () => {
     expect(localStorage.getItem("mimikara_theme")).toBe("dark");
   });
 
+  it("gives the bars of the phone the background of the theme", () => {
+    const meta = document.head.appendChild(Object.assign(document.createElement("meta"), { name: "theme-color" }));
+    render(<App />);
+    expect(meta.content).toBe("#0b0f19");
+
+    fireEvent.click(screen.getByRole("button", { name: /Toggle Theme/i }));
+    expect(meta.content).toBe("#f8fafc");
+    meta.remove();
+  });
+
   it("toggles hide Han Viet and saves to localStorage", () => {
     render(<App />);
 

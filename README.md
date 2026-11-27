@@ -27,6 +27,15 @@ The DynamoDB table (stack output `ProgressTableName`) has one `profile` item per
 * 5 wrong passwords in a row lock the account for 5 minutes.
 * **Forgotten password**: with AWS credentials of the account, `pip install boto3 && python3 backend/reset_password.py <username>` asks for a new password and closes the learner's sessions; the progress is kept.
 
+### 📱 On a phone (iPhone, Android)
+
+The app is a web app that installs on the home screen and then opens full screen, with its own icon, like a native app (no App Store needed):
+
+* **iPhone / iPad**: open the CloudFront URL in **Safari** → **Chia sẻ** (Share) → **Thêm vào MH chính** (Add to Home Screen) → **Thêm**.
+* **Android**: open it in **Chrome** → ⋮ → **Cài đặt ứng dụng** (Install app).
+
+The installed app has its own storage, so log in once more inside it; the progress comes from the server. It needs the network to open (no service worker), then works offline like the website. `frontend/public` holds the manifest and the icons (`scripts/build_icons.sh` draws them with ImageMagick); `index.html` sets the iOS full-screen mode, and `index.css` keeps the content clear of the notch and the home indicator.
+
 ---
 
 ## 📐 Architecture
